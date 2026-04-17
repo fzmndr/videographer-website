@@ -107,4 +107,14 @@ export const worksData = [
     description:
       "Dokumentasi visual yang menangkap energi event dengan ritme yang dinamis.",
   },
+  {
+    id: 6,
+    title: "Lavani",
+    slug: "product-campaign",
+    category: "Brand",
+    image: "/images/lavani.jpg",
+    video: "/videos/lavani.mp4",
+    description:
+      "Lavani Dengan Project Yang Memanjakan Mata",
+  },
 ];
