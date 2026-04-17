@@ -97,4 +97,14 @@ export const worksData = [
     description:
       "Dokumentasi visual yang menangkap energi event dengan ritme yang dinamis.",
   },
+  {
+    id: 5,
+    title: "Live Quality",
+    slug: "product-campaign",
+    category: "Brand",
+    image: "/images/hyundai.jpg",
+    video: "/videos/hyundai.mp4",
+    description:
+      "Dokumentasi visual yang menangkap energi event dengan ritme yang dinamis.",
+  },
 ];
