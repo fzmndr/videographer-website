@@ -1249,6 +1249,25 @@ textarea:focus-visible {
   .works {
     padding: 90px 0;
   }
+  .works__filters {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 10px;
+    margin: 28px 0 34px;
+    padding-bottom: 6px;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .works__filters::-webkit-scrollbar {
+    display: none;
+  }
+
+  .works__filter {
+    flex: 0 0 auto;
+    min-height: 44px;
+    padding: 12px 18px;
+  }
 
   .works-grid {
     grid-template-columns: 1fr;
@@ -1261,6 +1280,26 @@ textarea:focus-visible {
 
   .work-overlay__bottom h3 {
     font-size: 1.2rem;
+  }
+  .work-overlay {
+    padding: 18px;
+    background:
+      linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0.08) 0%,
+        rgba(0, 0, 0, 0.18) 36%,
+        rgba(0, 0, 0, 0.84) 100%
+      );
+  }
+
+  .work-overlay__bottom h3 {
+    font-size: 1.35rem;
+    line-height: 1.05;
+  }
+
+  .work-category {
+    font-size: 0.72rem;
+    padding: 7px 12px;
   }
 }
 @media (max-width: 900px) {
@@ -1484,6 +1523,25 @@ textarea:focus-visible {
   background: var(--surface);
   border: 1px solid var(--line);
 }
+@media (max-width: 900px) {
+  .about {
+    gap: 28px;
+    min-height: auto;
+  }
+
+  .about__content p {
+    margin-bottom: 14px;
+    line-height: 1.75;
+    font-size: 0.98rem;
+  }
+
+  .section-title--about h3 {
+    font-size: clamp(2rem, 9vw, 2.9rem);
+    max-width: 10ch;
+  }
+}
+
+/* SECTION */
 .section {
   padding: 120px 0;
   border-bottom: 1px solid rgba(255,255,255,0.05);
@@ -1725,6 +1783,45 @@ textarea:focus-visible {
     padding: 22px;
   }
 }
+@media (max-width: 640px) {
+  .contact__quick {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .contact__quick-link {
+    width: 100%;
+    justify-content: center;
+    min-height: 48px;
+  }
+
+  .contact__title {
+    font-size: clamp(2.1rem, 10vw, 3rem);
+    max-width: 10ch;
+  }
+
+  .contact__text {
+    line-height: 1.8;
+    margin-bottom: 22px;
+  }
+  .contact-form input,
+  .contact-form textarea {
+    min-height: 52px;
+    padding: 16px 18px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.035);
+  }
+
+  .contact-form textarea {
+    min-height: 140px;
+  }
+
+  .contact-form input::placeholder,
+  .contact-form textarea::placeholder {
+    color: rgba(255, 255, 255, 0.42);
+  }
+}
+
 .contact-form .btn[disabled] {
   opacity: 0.72;
   cursor: not-allowed;
@@ -2053,8 +2150,18 @@ textarea:focus-visible {
 /* RESPONSIVE */
 @media (max-width: 900px) {
   body {
-    cursor: auto;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  body,
+  body.has-cursor {
+    cursor: none;
   }
+}
 
   .cursor-dot,
   .cursor-outline {
@@ -2072,23 +2179,30 @@ textarea:focus-visible {
   }
 
   .hero {
-    min-height: 78vh;
+    min-height: auto;
+    padding: 96px 0 56px;
   }
 
   .hero__inner {
     transform: translateX(0);
-    padding: 110px 20px 80px;
+    padding: 0 20px;
   }
 
   .hero__title {
-    font-size: clamp(2.4rem, 12vw, 4rem);
-    line-height: 1.02;
+    font-size: clamp(2.2rem, 11vw, 3.4rem);
+    line-height: 0.98;
+    margin-bottom: 18px;
     text-wrap: balance;
     text-shadow: 0 6px 30px rgba(0, 0, 0, 0.22);
   }
 
   .hero__text {
-    font-size: 0.95rem;
+    font-size: 0.98rem;
+    line-height: 1.75;
+    margin-bottom: 24px;
+  }
+  .hero__actions {
+    gap: 12px;
   }
 
   .works-grid,
@@ -2099,11 +2213,11 @@ textarea:focus-visible {
   }
 
   .section {
-    padding: 120px 0;
+    padding: 84px 0;
   }
 
   .showreel {
-    padding: 80px 0;
+    padding: 72px 0;
   }
 
   .showreel__media {
@@ -2111,7 +2225,7 @@ textarea:focus-visible {
   }
 
   .showreel__video {
-    height: 420px;
+    height: 340px;
   }
 
   .showreel__overlay {
@@ -2151,11 +2265,35 @@ textarea:focus-visible {
     padding: 28px;
   }
   .featured-project__grid {
-  grid-template-columns: 1fr;
+    gap: 22px;
+  }
+  .featured-project__media {
+    order: -1;
   }
 
-  .featured-project__image {
-  height: 420px;
+ .featured-project__image {
+    height: 360px;
+  }
+  .featured-project__title {
+    font-size: clamp(2rem, 9vw, 2.8rem);
+  }
+  .featured-project__text {
+    line-height: 1.7;
+    margin-bottom: 18px;
+  }
+}
+@media (max-width: 640px) {
+  .showreel__video {
+    height: 300px;
+  }
+
+  .showreel__overlay {
+    padding: 18px;
+  }
+
+  .showreel__content h3 {
+    font-size: 1.9rem;
+    line-height: 1.08;
   }
 }
 
