@@ -117,4 +117,14 @@ export const worksData = [
     description:
       "Lavani Dengan Project Yang Memanjakan Mata",
   },
+  {
+    id: 7,
+    title: "Mugler",
+    slug: "product-campaign",
+    category: "Brand",
+    image: "/images/mugler.jpg",
+    video: "/videos/mugler.mp4",
+    description:
+      "Mugler Suatu Inovasi Yang Akan membawa anda kedalam visual modern",
+  },
 ];
