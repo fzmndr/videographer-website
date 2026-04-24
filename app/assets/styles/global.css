@@ -2195,35 +2195,81 @@ textarea:focus-visible {
   background: rgba(255, 255, 255, 0.35);
 }
 
-/*FLOATING WHASTAPP*/
-.floating-wa {
+/* FLOATING SOCIAL MEDIA */
+.floating-social {
   position: fixed;
   right: 22px;
   bottom: 22px;
   z-index: 9999;
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 14px 20px;
-  border-radius: 999px;
-  background: #25d366;
-  color: #fff;
-  text-decoration: none;
-  font-size: 15px;
-  font-weight: 700;
-  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.28);
+
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
-.floating-wa:hover {
-  transform: translateY(-3px);
+/* base button */
+.floating-social__btn {
+  width: 52px;
+  height: 52px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+  color: #fff;
+  font-size: 20px;
+  text-decoration: none;
+
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
+  transition: all 0.25s ease;
+}
+.floating-social__btn::after {
+  content: attr(aria-label);
+  position: absolute;
+  right: 60px;
+  background: #111;
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.2s;
+}
+
+.floating-social__btn:hover {
+  transform: translateY(-4px) scale(1.05);
+}
+.floating-social__btn:hover::after {
+  opacity: 1;
+}
+
+/* WhatsApp */
+.floating-social__btn--wa {
+  background: #25d366;
+}
+
+/* Instagram gradient */
+.floating-social__btn--ig {
+  background: linear-gradient(
+    45deg,
+    #f58529,
+    #dd2a7b,
+    #8134af,
+    #515bd4
+  );
 }
 
 @media (max-width: 768px) {
-  .floating-wa {
-    left: 16px;
+  .floating-social {
     right: 16px;
     bottom: 16px;
-    justify-content: center;
+  }
+
+  .floating-social__btn {
+    width: 48px;
+    height: 48px;
   }
 }
 
