@@ -1,9 +1,17 @@
 import { motion } from "framer-motion";
 import { easing } from "../lib/motion";
 
+const WHATSAPP_NUMBER = "6285775355771";
+const WHATSAPP_TEXT =
+  "Halo Dika Doki, saya tertarik dengan jasa videography. Bisa info paket dan harga?";
+
 export default function Hero() {
+  const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
+    WHATSAPP_TEXT
+  )}`;
+
   return (
-    <section id="home" className="hero">
+    <section id="home" className="hero" aria-labelledby="hero-title">
       <motion.div
         className="hero__bg"
         initial={{ scale: 1.06, opacity: 0.7 }}
@@ -17,6 +25,8 @@ export default function Hero() {
           loop
           playsInline
           preload="metadata"
+          poster="/images/hero-poster.jpg"
+          aria-hidden="true"
         >
           <source src="/videos/hero.mp4" type="video/mp4" />
         </video>
@@ -31,10 +41,10 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: easing }}
           >
-            DIKA DOKI
+            DIKA DOKI VIDEOGRAPHY
           </motion.p>
 
-          <h1 className="hero__title">
+          <h1 id="hero-title" className="hero__title">
             <motion.span
               className="hero__title-line"
               initial={{ opacity: 0, y: 28 }}
@@ -59,8 +69,9 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.35, ease: easing }}
           >
-            Visual yang bersih, emosional, dan berkelas untuk brand, event,
-            dan momen personal.
+            Videography cinematic untuk wedding, event, brand, dan momen
+            personal — dibuat dengan visual yang emosional, bersih, dan
+            berkelas.
           </motion.p>
 
           <motion.div
@@ -70,10 +81,17 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.5, ease: easing }}
           >
             <a href="#portfolio" className="btn btn--primary">
-              Lihat Karya
+              Lihat Portfolio
             </a>
-            <a href="#contact" className="btn btn--secondary">
-              Contact
+
+            <a
+              href={whatsappUrl}
+              className="btn btn--secondary"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Chat Dika Doki via WhatsApp"
+            >
+              Booking via WhatsApp
             </a>
           </motion.div>
         </div>

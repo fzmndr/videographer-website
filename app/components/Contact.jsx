@@ -2,6 +2,8 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { staggerWrap, itemVariants, viewportDefault } from "../lib/motion";
 
+const WHATSAPP_NUMBER = "6285775355771";
+
 export default function Contact() {
   const [formData, setFormData] = useState({
     name: "",
@@ -24,11 +26,25 @@ export default function Contact() {
     if (error) setError("");
   };
 
+  const isValidEmail = (email) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  };
+
   const handleWhatsAppSubmit = (e) => {
     e.preventDefault();
 
-    if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
+    const name = formData.name.trim();
+    const email = formData.email.trim();
+    const projectType = formData.projectType.trim();
+    const message = formData.message.trim();
+
+    if (!name || !email || !message) {
       setError("Mohon isi nama, email, dan pesan terlebih dahulu.");
+      return;
+    }
+
+    if (!isValidEmail(email)) {
+      setError("Mohon masukkan email yang valid.");
       return;
     }
 
@@ -37,26 +53,29 @@ export default function Contact() {
     const text = encodeURIComponent(
       `Halo Dika Doki,
 
-Saya ingin konsultasi project.
+Saya tertarik untuk konsultasi project videography.
 
-Nama: ${formData.name}
-Email: ${formData.email}
-Jenis Project: ${formData.projectType || "-"}
+Nama: ${name}
+Email: ${email}
+Jenis Project: ${projectType || "-"}
 
 Pesan:
-${formData.message}`
+${message}
+
+Mohon info paket, estimasi harga, dan ketersediaan jadwalnya.`
     );
 
-    const whatsappUrl = `https://wa.me/6285775355771?text=${text}`;
+    const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${text}`;
+
+    window.open(whatsappUrl, "_blank", "noopener,noreferrer");
 
     setTimeout(() => {
-      window.open(whatsappUrl, "_blank", "noopener,noreferrer");
       setIsSending(false);
-    }, 700);
+    }, 500);
   };
 
   return (
-    <section id="contact" className="section">
+    <section id="contact" className="section" aria-labelledby="contact-title">
       <div className="container">
         <motion.div
           className="contact contact--premium"
@@ -67,9 +86,11 @@ ${formData.message}`
         >
           <motion.div className="contact__intro" variants={itemVariants}>
             <p className="contact__eyebrow">Contact</p>
-            <h2 className="contact__title">
+
+            <h2 id="contact-title" className="contact__title">
               Let’s create visuals with clarity, emotion, and intention.
             </h2>
+
             <p className="contact__text">
               Terbuka untuk project brand, event, wedding, dan kolaborasi visual
               lainnya. Ceritakan kebutuhan Anda, dan mari wujudkan dengan arah
@@ -80,15 +101,19 @@ ${formData.message}`
               <a
                 href="mailto:hello@dikadoki.com"
                 className="contact__quick-link"
+                aria-label="Kirim email ke Dika Doki"
               >
                 hello@dikadoki.com
               </a>
 
               <a
-                href="https://wa.me/6285775355771"
+                href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
+                  "Halo Dika Doki, saya tertarik dengan jasa videography. Bisa info paket dan harga?"
+                )}`}
                 className="contact__quick-link"
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
+                aria-label="Chat Dika Doki via WhatsApp"
               >
                 WhatsApp
               </a>
@@ -105,6 +130,7 @@ ${formData.message}`
                 placeholder="Nama Anda"
                 value={formData.name}
                 onChange={handleChange}
+                autoComplete="name"
                 required
               />
 
@@ -114,22 +140,24 @@ ${formData.message}`
                 placeholder="Email"
                 value={formData.email}
                 onChange={handleChange}
+                autoComplete="email"
                 required
               />
 
               <input
                 type="text"
                 name="projectType"
-                placeholder="Jenis project"
+                placeholder="Jenis project, contoh: Wedding / Event / Brand"
                 value={formData.projectType}
                 onChange={handleChange}
               />
 
               <textarea
                 name="message"
-                placeholder="Ceritakan project Anda"
+                placeholder="Ceritakan kebutuhan, lokasi, tanggal acara, dan konsep yang diinginkan"
                 value={formData.message}
                 onChange={handleChange}
+                rows="5"
                 required
               />
 
@@ -137,12 +165,16 @@ ${formData.message}`
                 type="submit"
                 className="btn btn--primary"
                 disabled={isSending}
+                aria-label="Kirim form konsultasi via WhatsApp"
               >
-                {isSending ? "Menyiapkan WhatsApp..." : "Kirim via WhatsApp"}
+                {isSending ? "Membuka WhatsApp..." : "Kirim via WhatsApp"}
               </button>
 
               {error && (
-                <p className="contact-form__message contact-form__message--error">
+                <p
+                  className="contact-form__message contact-form__message--error"
+                  role="alert"
+                >
                   {error}
                 </p>
               )}
