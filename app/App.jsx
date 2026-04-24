@@ -14,6 +14,7 @@ import CustomCursor from "./components/CustomCursor";
 import PageTransition from "./components/PageTransition";
 import LoadingScreen from "./components/LoadingScreen";
 import FeaturedProject from "./components/FeaturedProject";
+import FloatingWhatsApp from "./components/FloatingWhatsApp";
 
 import ProjectDetail from "./pages/ProjectDetail";
 
@@ -26,6 +27,7 @@ function Home({ setIsPreviewOpen }) {
       <Showreel />
       <About />
       <Contact />
+      <FloatingWhatsApp />
     </PageTransition>
   );
 }

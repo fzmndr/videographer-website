@@ -2194,6 +2194,39 @@ textarea:focus-visible {
   margin: 0 auto;
   background: rgba(255, 255, 255, 0.35);
 }
+
+/*FLOATING WHASTAPP*/
+.floating-wa {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 9999;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 20px;
+  border-radius: 999px;
+  background: #25d366;
+  color: #fff;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 700;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.28);
+}
+
+.floating-wa:hover {
+  transform: translateY(-3px);
+}
+
+@media (max-width: 768px) {
+  .floating-wa {
+    left: 16px;
+    right: 16px;
+    bottom: 16px;
+    justify-content: center;
+  }
+}
+
 /* FEATURED PROJECT */
 .featured-project {
   background: rgba(255, 255, 255, 0.015);
