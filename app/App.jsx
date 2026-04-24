@@ -15,6 +15,7 @@ import PageTransition from "./components/PageTransition";
 import LoadingScreen from "./components/LoadingScreen";
 import FeaturedProject from "./components/FeaturedProject";
 import FloatingWhatsApp from "./components/FloatingWhatsApp";
+import InstagramPreview from "./components/InstagramPreview";
 
 import ProjectDetail from "./pages/ProjectDetail";
 
@@ -26,6 +27,7 @@ function Home({ setIsPreviewOpen }) {
       <Works setIsPreviewOpen={setIsPreviewOpen} />
       <Showreel />
       <About />
+      <InstagramPreview />
       <Contact />
       <FloatingWhatsApp />
     </PageTransition>
