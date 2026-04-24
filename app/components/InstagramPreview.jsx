@@ -26,7 +26,7 @@ export default function InstagramPreview() {
           <p className="section__eyebrow">Instagram</p>
           <h2>Behind the scenes & latest works</h2>
           <a
-            href="https://instagram.com/username_kamu"
+            href="https://www.instagram.com/dikadoki/"
             target="_blank"
             rel="noopener noreferrer"
           >
