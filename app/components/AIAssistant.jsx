@@ -11,29 +11,36 @@ export default function AIAssistant() {
 
   const [result, setResult] = useState("");
 
-  const generateRecommendation = async () => {
-  setResult("AI sedang membuat rekomendasi...");
-
-  try {
-    const response = await fetch("http://localhost:5000/api/recommend-package", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(form),
+  const handleChange = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
     });
+  };
 
-    const data = await response.json();
+  const generateRecommendation = async () => {
+    setResult("AI sedang membuat rekomendasi...");
 
-    if (!response.ok) {
-      throw new Error(data.error || "Terjadi kesalahan.");
+    try {
+      const response = await fetch("/api/recommend-package", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Terjadi kesalahan.");
+      }
+
+      setResult(data.result);
+    } catch (error) {
+      setResult("Maaf, AI sedang bermasalah. Coba lagi sebentar.");
     }
-
-    setResult(data.result);
-  } catch (error) {
-    setResult("Maaf, AI sedang bermasalah. Coba lagi sebentar.");
-  }
-};
+  };
 
   const whatsappText = encodeURIComponent(result);
   const whatsappNumber = "6285775355771";
