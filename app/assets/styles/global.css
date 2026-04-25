@@ -2437,7 +2437,7 @@ textarea:focus-visible {
 .ai-chat-toggle {
   position: fixed;
   right: 22px;
-  bottom: 90px; /* ⬅️ ini kunci biar gak nabrak WA */
+  bottom: 150px; /* ⬅️ ini kunci biar gak nabrak WA */
   width: 60px;
   height: 60px;
   border-radius: 50%;
@@ -2461,7 +2461,7 @@ textarea:focus-visible {
 .ai-chat-box {
   position: fixed;
   right: 22px;
-  bottom: 160px; /* ⬅️ di atas tombol AI */
+  bottom: 220px; /* ⬅️ di atas tombol AI */
   width: min(360px, calc(100vw - 32px));
   height: 520px;
 
@@ -2568,7 +2568,7 @@ textarea:focus-visible {
 
   .ai-chat-toggle {
     right: 16px;
-    bottom: 88px;
+    bottom: 140px;
     width: 56px;
     height: 56px;
   }
@@ -2576,9 +2576,9 @@ textarea:focus-visible {
   .ai-chat-box {
     right: 12px;
     left: 12px;
-    bottom: 150px;
+    bottom: 205px;
     width: auto;
-    height: 70vh;
+    height: 65vh;
   }
 }
 
