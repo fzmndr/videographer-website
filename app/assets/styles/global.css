@@ -2434,6 +2434,123 @@ textarea:focus-visible {
   font-family: inherit;
   color: #eaeaea;
 }
+.ai-chat-toggle {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  width: 62px;
+  height: 62px;
+  border-radius: 999px;
+  border: none;
+  background: #ffffff;
+  color: #111111;
+  font-size: 26px;
+  font-weight: 700;
+  cursor: pointer;
+  z-index: 9999;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+}
+
+.ai-chat-box {
+  position: fixed;
+  right: 22px;
+  bottom: 96px;
+  width: min(360px, calc(100vw - 32px));
+  height: 520px;
+  background: #101010;
+  color: #ffffff;
+  border-radius: 24px;
+  overflow: hidden;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
+}
+
+.ai-chat-header {
+  padding: 18px;
+  background: #181818;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.ai-chat-header strong {
+  display: block;
+  font-size: 16px;
+}
+
+.ai-chat-header span {
+  color: #aaa;
+  font-size: 13px;
+}
+
+.ai-chat-messages {
+  flex: 1;
+  padding: 16px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ai-chat-message {
+  max-width: 85%;
+  padding: 12px 14px;
+  border-radius: 16px;
+  font-size: 14px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+}
+
+.ai-chat-message.ai {
+  align-self: flex-start;
+  background: #1e1e1e;
+  color: #f2f2f2;
+}
+
+.ai-chat-message.user {
+  align-self: flex-end;
+  background: #ffffff;
+  color: #111111;
+}
+
+.ai-chat-input {
+  display: flex;
+  gap: 8px;
+  padding: 12px;
+  background: #151515;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.ai-chat-input input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: #242424;
+  color: #ffffff;
+  padding: 13px 14px;
+  border-radius: 999px;
+}
+
+.ai-chat-input button {
+  border: none;
+  border-radius: 999px;
+  padding: 0 16px;
+  background: #ffffff;
+  color: #111111;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.ai-chat-whatsapp {
+  display: block;
+  text-align: center;
+  padding: 14px;
+  background: #25d366;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 700;
+}
 
 /* FEATURED PROJECT */
 .featured-project {
