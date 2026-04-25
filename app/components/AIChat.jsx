@@ -1,72 +1,128 @@
-import OpenAI from "openai";
-import fs from "fs";
-import path from "path";
+import { useState } from "react";
 
-const client = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+export default function AIChat() {
+  const [open, setOpen] = useState(false);
+  const [messages, setMessages] = useState([
+    {
+      role: "ai",
+      text: "Halo 👋 Saya AI Assistant Dika Doki. Mau tanya paket video untuk wedding, event, atau company profile?",
+    },
+  ]);
+  const [input, setInput] = useState("");
+  const [loading, setLoading] = useState(false);
 
-export default async function handler(req, res) {
-  if (req.method !== "POST") {
-    return res.status(405).json({ error: "Method not allowed" });
-  }
+  const whatsappNumber = "6285775355771";
 
-  try {
-    if (!process.env.OPENAI_API_KEY) {
-      return res.status(500).json({
-        error: "OPENAI_API_KEY belum terbaca di Vercel.",
-      });
-    }
+  const sendMessage = async () => {
+    if (!input.trim() || loading) return;
 
-    const messages = req.body.messages || [];
+    const userMessage = input;
 
-    let knowledge = `
-Nama bisnis: Dika Doki Videography
-Layanan: Wedding Videography, Engagement Video, Event Documentation, Company Profile
-Lokasi: Bekasi dan sekitarnya
-WhatsApp: 085775355771
-Style: Cinematic, storytelling, emotional, elegant
-`;
+    const newMessages = [
+      ...messages,
+      {
+        role: "user",
+        text: userMessage,
+      },
+    ];
+
+    setMessages(newMessages);
+    setInput("");
+    setLoading(true);
 
     try {
-      const filePath = path.join(process.cwd(), "knowledge", "dika-doki.txt");
-      knowledge = fs.readFileSync(filePath, "utf-8");
-    } catch (err) {
-      console.log("Knowledge file tidak ditemukan, pakai default knowledge.");
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          messages: newMessages,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || "AI error");
+      }
+
+      setMessages([
+        ...newMessages,
+        {
+          role: "ai",
+          text: data.reply,
+        },
+      ]);
+    } catch (error) {
+      setMessages([
+        ...newMessages,
+        {
+          role: "ai",
+          text: "Maaf, AI sedang bermasalah. Kamu bisa langsung chat WhatsApp kami ya.",
+        },
+      ]);
+    } finally {
+      setLoading(false);
     }
+  };
 
-    const conversation = messages
-      .map((msg) => `${msg.role === "user" ? "Customer" : "AI"}: ${msg.text}`)
-      .join("\n");
+  return (
+    <>
+      <button className="ai-chat-toggle" onClick={() => setOpen(!open)}>
+        {open ? "×" : "💬"}
+      </button>
 
-    const aiResponse = await client.responses.create({
-      model: "gpt-4.1-mini",
-      input: `
-Kamu adalah AI customer service dan sales assistant untuk Dika Doki Videography.
+      {open && (
+        <div className="ai-chat-box">
+          <div className="ai-chat-header">
+            <div>
+              <strong>AI Assistant</strong>
+              <span>Dika Doki Videography</span>
+            </div>
+          </div>
 
-Gunakan knowledge base berikut:
-${knowledge}
+          <div className="ai-chat-messages">
+            {messages.map((msg, index) => (
+              <div
+                key={index}
+                className={
+                  msg.role === "user"
+                    ? "ai-chat-message user"
+                    : "ai-chat-message ai"
+                }
+              >
+                {msg.text}
+              </div>
+            ))}
 
-Tugas:
-1. Jawab pertanyaan customer.
-2. Ingat konteks percakapan.
-3. Rekomendasikan paket jika customer bertanya.
-4. Arahkan customer serius ke WhatsApp.
-5. Gunakan bahasa Indonesia yang ramah, santai, dan profesional.
+            {loading && (
+              <div className="ai-chat-message ai">AI sedang mengetik...</div>
+            )}
+          </div>
 
-Riwayat percakapan:
-${conversation}
-      `,
-    });
+          <div className="ai-chat-input">
+            <input
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && sendMessage()}
+              placeholder="Tanya paket video..."
+            />
+            <button onClick={sendMessage} disabled={loading}>
+              Kirim
+            </button>
+          </div>
 
-    return res.status(200).json({
-      reply: aiResponse.output_text,
-    });
-  } catch (error) {
-    console.error("CHAT API ERROR:", error);
-
-    return res.status(500).json({
-      error: error.message || "AI sedang bermasalah.",
-    });
-  }
+          <a
+            className="ai-chat-whatsapp"
+            href={`https://wa.me/${whatsappNumber}`}
+            target="_blank"
+            rel="noreferrer"
+          >
+            Lanjut WhatsApp
+          </a>
+        </div>
+      )}
+    </>
+  );
 }
