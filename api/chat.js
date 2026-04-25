@@ -12,18 +12,16 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { messages } = req.body;
+    const messages = req.body.messages || [];
 
     const filePath = path.join(process.cwd(), "knowledge", "dika-doki.txt");
     const knowledge = fs.readFileSync(filePath, "utf-8");
 
     const conversation = messages
-      .map((msg) => {
-        return `${msg.role === "user" ? "Customer" : "AI"}: ${msg.text}`;
-      })
+      .map((msg) => `${msg.role === "user" ? "Customer" : "AI"}: ${msg.text}`)
       .join("\n");
 
-    const response = await client.responses.create({
+    const aiResponse = await client.responses.create({
       model: "gpt-4.1-mini",
       input: `
 Kamu adalah AI customer service dan sales assistant untuk Dika Doki Videography.
@@ -46,7 +44,7 @@ ${conversation}
     });
 
     res.status(200).json({
-      reply: response.output_text,
+      reply: aiResponse.output_text,
     });
   } catch (error) {
     console.error(error);

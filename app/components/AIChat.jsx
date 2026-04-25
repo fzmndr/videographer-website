@@ -31,25 +31,29 @@ export default function AIChat() {
     setLoading(true);
 
     try {
-      const response = await fetch("/api/chat", {
+      const res = await fetch("/api/chat", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          message: userMessage,
+          messages: newMessages,
         }),
       });
 
-        const response = await fetch("/api/chat", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || "AI error");
+      }
+
+      setMessages([
+        ...newMessages,
+        {
+          role: "ai",
+          text: data.reply,
         },
-        body: JSON.stringify({
-            messages: newMessages,
-        }),
-        });
+      ]);
     } catch (error) {
       setMessages([
         ...newMessages,
@@ -116,7 +120,9 @@ export default function AIChat() {
               onKeyDown={handleKeyDown}
               placeholder="Tanya paket video..."
             />
-            <button onClick={sendMessage}>Kirim</button>
+            <button onClick={sendMessage} disabled={loading}>
+              Kirim
+            </button>
           </div>
 
           <a
