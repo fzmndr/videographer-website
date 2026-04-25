@@ -16,7 +16,7 @@ export default function AIChat() {
   const sendMessage = async () => {
     if (!input.trim() || loading) return;
 
-    const userMessage = input;
+    const userMessage = input.trim();
     const newMessages = [...messages, { role: "user", text: userMessage }];
 
     setMessages(newMessages);
@@ -26,16 +26,20 @@ export default function AIChat() {
     try {
       const res = await fetch("/api/chat", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({ messages: newMessages }),
       });
 
       const data = await res.json();
 
-      if (!res.ok) throw new Error(data.error || "AI error");
+      if (!res.ok) {
+        throw new Error(data.error || "AI error");
+      }
 
       setMessages([...newMessages, { role: "ai", text: data.reply }]);
-    } catch {
+    } catch (error) {
       setMessages([
         ...newMessages,
         {
@@ -50,7 +54,11 @@ export default function AIChat() {
 
   return (
     <>
-      <button className="ai-chat-toggle" onClick={() => setOpen(!open)}>
+      <button
+        className={`ai-chat-toggle ${open ? "is-open" : ""}`}
+        onClick={() => setOpen(!open)}
+        aria-label="Buka AI Chat"
+      >
         {open ? "×" : "💬"}
       </button>
 
@@ -67,11 +75,9 @@ export default function AIChat() {
             {messages.map((msg, index) => (
               <div
                 key={index}
-                className={
-                  msg.role === "user"
-                    ? "ai-chat-message user"
-                    : "ai-chat-message ai"
-                }
+                className={`ai-chat-message ${
+                  msg.role === "user" ? "user" : "ai"
+                }`}
               >
                 {msg.text}
               </div>
@@ -86,9 +92,12 @@ export default function AIChat() {
             <input
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && sendMessage()}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") sendMessage();
+              }}
               placeholder="Tanya paket video..."
             />
+
             <button onClick={sendMessage} disabled={loading}>
               Kirim
             </button>
