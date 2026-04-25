@@ -1,4 +1,6 @@
 import OpenAI from "openai";
+import fs from "fs";
+import path from "path";
 
 const client = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
@@ -12,28 +14,26 @@ export default async function handler(req, res) {
   try {
     const { message } = req.body;
 
+    // 🔥 baca knowledge file
+    const filePath = path.join(process.cwd(), "knowledge", "dika-doki.txt");
+    const knowledge = fs.readFileSync(filePath, "utf-8");
+
     const response = await client.responses.create({
       model: "gpt-4.1-mini",
       input: `
-Kamu adalah AI customer service untuk bisnis videographer bernama Dika Doki.
+Kamu adalah AI customer service untuk Dika Doki Videography.
 
-Gaya bahasa:
-- Bahasa Indonesia
-- Ramah, santai, profesional
-- Jawaban singkat tapi meyakinkan
-- Arahkan customer serius ke WhatsApp
+Gunakan informasi berikut sebagai sumber utama:
+${knowledge}
 
-Kamu bisa bantu:
-- menjelaskan paket videografi
-- rekomendasi paket
-- menjawab pertanyaan wedding/event/company profile
-- menyarankan drone, full day, cinematic video
-- mengajak customer konsultasi via WhatsApp
+Aturan:
+- jawab berdasarkan data di atas
+- jika tidak ada di data, tetap bantu dengan jawaban umum
+- gunakan bahasa Indonesia
+- ramah, santai, profesional
+- arahkan ke WhatsApp jika user terlihat serius
 
-Nomor WhatsApp:
-085775355771
-
-Pertanyaan customer:
+Pertanyaan:
 ${message}
       `,
     });
@@ -42,8 +42,9 @@ ${message}
       reply: response.output_text,
     });
   } catch (error) {
+    console.error(error);
     res.status(500).json({
-      error: "AI sedang bermasalah.",
+      error: "AI error",
     });
   }
 }
