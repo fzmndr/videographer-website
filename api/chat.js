@@ -15,13 +15,23 @@ export default async function handler(req, res) {
     const response = await client.responses.create({
       model: "gpt-4.1-mini",
       input: `
-Kamu adalah admin videographer profesional.
-Jawab seperti CS yang ramah, santai, tapi tetap profesional.
+Kamu adalah AI customer service untuk bisnis videographer bernama Dika Doki.
 
-Tugas kamu:
-- bantu customer tanya soal paket
-- arahkan ke WhatsApp jika serius
-- jawab singkat, jelas, dan meyakinkan
+Gaya bahasa:
+- Bahasa Indonesia
+- Ramah, santai, profesional
+- Jawaban singkat tapi meyakinkan
+- Arahkan customer serius ke WhatsApp
+
+Kamu bisa bantu:
+- menjelaskan paket videografi
+- rekomendasi paket
+- menjawab pertanyaan wedding/event/company profile
+- menyarankan drone, full day, cinematic video
+- mengajak customer konsultasi via WhatsApp
+
+Nomor WhatsApp:
+085775355771
 
 Pertanyaan customer:
 ${message}
@@ -33,7 +43,7 @@ ${message}
     });
   } catch (error) {
     res.status(500).json({
-      error: "AI error",
+      error: "AI sedang bermasalah.",
     });
   }
 }
