@@ -12,29 +12,36 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { message } = req.body;
+    const { messages } = req.body;
 
-    // 🔥 baca knowledge file
     const filePath = path.join(process.cwd(), "knowledge", "dika-doki.txt");
     const knowledge = fs.readFileSync(filePath, "utf-8");
+
+    const conversation = messages
+      .map((msg) => {
+        return `${msg.role === "user" ? "Customer" : "AI"}: ${msg.text}`;
+      })
+      .join("\n");
 
     const response = await client.responses.create({
       model: "gpt-4.1-mini",
       input: `
-Kamu adalah AI customer service untuk Dika Doki Videography.
+Kamu adalah AI customer service dan sales assistant untuk Dika Doki Videography.
 
-Gunakan informasi berikut sebagai sumber utama:
+Gunakan knowledge base berikut sebagai sumber utama:
 ${knowledge}
 
-Aturan:
-- jawab berdasarkan data di atas
-- jika tidak ada di data, tetap bantu dengan jawaban umum
-- gunakan bahasa Indonesia
-- ramah, santai, profesional
-- arahkan ke WhatsApp jika user terlihat serius
+Tugas kamu:
+1. Jawab pertanyaan customer berdasarkan knowledge base.
+2. Ingat konteks percakapan sebelumnya.
+3. Jika customer menyebut acara, budget, durasi, atau drone, rekomendasikan paket paling cocok.
+4. Jika customer terlihat serius, arahkan ke WhatsApp.
+5. Jangan mengarang harga di luar knowledge base.
+6. Jika informasi tidak ada, jawab dengan jujur dan arahkan konsultasi via WhatsApp.
+7. Gunakan bahasa Indonesia yang ramah, santai, profesional, dan meyakinkan.
 
-Pertanyaan:
-${message}
+Riwayat percakapan:
+${conversation}
       `,
     });
 
@@ -44,7 +51,7 @@ ${message}
   } catch (error) {
     console.error(error);
     res.status(500).json({
-      error: "AI error",
+      error: "AI sedang bermasalah.",
     });
   }
 }
