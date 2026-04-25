@@ -11,10 +11,25 @@ export default function AIAssistant() {
 
   const [result, setResult] = useState("");
 
+  const formatRupiah = (value) => {
+    const angka = value.replace(/\D/g, "");
+    return angka.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  };
+
   const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    if (name === "budget") {
+      setForm({
+        ...form,
+        budget: formatRupiah(value),
+      });
+      return;
+    }
+
     setForm({
       ...form,
-      [e.target.name]: e.target.value,
+      [name]: value,
     });
   };
 
@@ -27,7 +42,10 @@ export default function AIAssistant() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(form),
+        body: JSON.stringify({
+          ...form,
+          budget: Number(form.budget.replace(/\./g, "")),
+        }),
       });
 
       const data = await response.json();
@@ -87,8 +105,9 @@ export default function AIAssistant() {
 
           <input
             name="budget"
-            type="number"
-            placeholder="Budget kamu"
+            type="text"
+            inputMode="numeric"
+            placeholder="Budget kamu, contoh: 10.000.000"
             value={form.budget}
             onChange={handleChange}
           />
