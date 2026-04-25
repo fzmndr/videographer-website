@@ -11,48 +11,29 @@ export default function AIAssistant() {
 
   const [result, setResult] = useState("");
 
-  const packages = [
-    {
-      name: "Basic Package",
-      match: "Cocok untuk acara simple, durasi pendek, dan budget hemat.",
-    },
-    {
-      name: "Cinematic Package",
-      match: "Cocok untuk wedding, engagement, company profile, atau acara penting.",
-    },
-    {
-      name: "Premium Package",
-      match: "Cocok untuk acara besar, butuh hasil cinematic, drone, dan dokumentasi lengkap.",
-    },
-  ];
+  const generateRecommendation = async () => {
+  setResult("AI sedang membuat rekomendasi...");
 
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
+  try {
+    const response = await fetch("http://localhost:5000/api/recommend-package", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(form),
+    });
 
-  const generateRecommendation = () => {
-    let recommended = packages[0];
+    const data = await response.json();
 
-    if (
-      form.event.toLowerCase().includes("wedding") ||
-      form.event.toLowerCase().includes("nikah") ||
-      form.drone === "yes"
-    ) {
-      recommended = packages[1];
+    if (!response.ok) {
+      throw new Error(data.error || "Terjadi kesalahan.");
     }
 
-    if (
-      Number(form.budget) >= 5000000 ||
-      form.duration.toLowerCase().includes("full") ||
-      form.drone === "yes"
-    ) {
-      recommended = packages[2];
-    }
-
-    setResult(
-      `Rekomendasi AI: ${recommended.name}\n\n${recommended.match}\n\nDetail acara:\n- Acara: ${form.event}\n- Lokasi: ${form.location}\n- Durasi: ${form.duration}\n- Drone: ${form.drone === "yes" ? "Ya" : "Tidak"}\n- Budget: Rp${form.budget}`
-    );
-  };
+    setResult(data.result);
+  } catch (error) {
+    setResult("Maaf, AI sedang bermasalah. Coba lagi sebentar.");
+  }
+};
 
   const whatsappText = encodeURIComponent(result);
   const whatsappNumber = "6285775355771";
