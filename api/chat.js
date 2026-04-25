@@ -12,13 +12,31 @@ export default async function handler(req, res) {
   }
 
   try {
+    if (!process.env.OPENAI_API_KEY) {
+      return res.status(500).json({
+        error: "OPENAI_API_KEY belum terbaca di Vercel.",
+      });
+    }
+
     const messages = req.body.messages || [];
 
-    const filePath = path.join(process.cwd(), "knowledge", "dika-doki.txt");
-    const knowledge = fs.readFileSync(filePath, "utf-8");
+    // 🔥 Knowledge fallback + file
+    let knowledge =
+      "Dika Doki Videography menyediakan jasa wedding, event, dan company profile di Bekasi.";
 
+    try {
+      const filePath = path.join(process.cwd(), "knowledge", "dika-doki.txt");
+      knowledge = fs.readFileSync(filePath, "utf-8");
+    } catch (error) {
+      console.log("Knowledge file tidak ditemukan, pakai default.");
+    }
+
+    // 🔥 Memory conversation
     const conversation = messages
-      .map((msg) => `${msg.role === "user" ? "Customer" : "AI"}: ${msg.text}`)
+      .map(
+        (msg) =>
+          `${msg.role === "user" ? "Customer" : "AI"}: ${msg.text}`
+      )
       .join("\n");
 
     const aiResponse = await client.responses.create({
@@ -32,24 +50,24 @@ ${knowledge}
 Tugas kamu:
 1. Jawab pertanyaan customer berdasarkan knowledge base.
 2. Ingat konteks percakapan sebelumnya.
-3. Jika customer menyebut acara, budget, durasi, atau drone, rekomendasikan paket paling cocok.
-4. Jika customer terlihat serius, arahkan ke WhatsApp.
+3. Rekomendasikan paket jika customer bertanya.
+4. Arahkan customer serius ke WhatsApp.
 5. Jangan mengarang harga di luar knowledge base.
-6. Jika informasi tidak ada, jawab dengan jujur dan arahkan konsultasi via WhatsApp.
-7. Gunakan bahasa Indonesia yang ramah, santai, profesional, dan meyakinkan.
+6. Gunakan bahasa Indonesia yang ramah, santai, profesional, dan meyakinkan.
 
 Riwayat percakapan:
 ${conversation}
       `,
     });
 
-    res.status(200).json({
+    return res.status(200).json({
       reply: aiResponse.output_text,
     });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({
-      error: "AI sedang bermasalah.",
+    console.error("CHAT API ERROR:", error);
+
+    return res.status(500).json({
+      error: error.message || "AI sedang bermasalah.",
     });
   }
 }

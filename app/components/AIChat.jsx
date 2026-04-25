@@ -5,7 +5,7 @@ export default function AIChat() {
   const [messages, setMessages] = useState([
     {
       role: "ai",
-      text: "Halo 👋 Saya AI Assistant Dika Doki. Mau tanya paket video untuk wedding, event, atau company profile?",
+      text: "Halo 👋 Saya AI Assistant Dika Doki. Mau tanya paket video?",
     },
   ]);
   const [input, setInput] = useState("");
@@ -20,10 +20,7 @@ export default function AIChat() {
 
     const newMessages = [
       ...messages,
-      {
-        role: "user",
-        text: userMessage,
-      },
+      { role: "user", text: userMessage },
     ];
 
     setMessages(newMessages);
@@ -49,17 +46,14 @@ export default function AIChat() {
 
       setMessages([
         ...newMessages,
-        {
-          role: "ai",
-          text: data.reply,
-        },
+        { role: "ai", text: data.reply },
       ]);
     } catch (error) {
       setMessages([
         ...newMessages,
         {
           role: "ai",
-          text: "Maaf, AI sedang bermasalah. Kamu bisa langsung chat WhatsApp kami ya.",
+          text: "Maaf, AI sedang bermasalah. Silakan langsung chat WhatsApp ya.",
         },
       ]);
     } finally {
@@ -69,57 +63,72 @@ export default function AIChat() {
 
   return (
     <>
-      <button className="ai-chat-toggle" onClick={() => setOpen(!open)}>
+      <button
+        onClick={() => setOpen(!open)}
+        style={{
+          position: "fixed",
+          bottom: "20px",
+          right: "20px",
+          width: "60px",
+          height: "60px",
+          borderRadius: "50%",
+          fontSize: "24px",
+          zIndex: 9999,
+        }}
+      >
         {open ? "×" : "💬"}
       </button>
 
       {open && (
-        <div className="ai-chat-box">
-          <div className="ai-chat-header">
-            <div>
-              <strong>AI Assistant</strong>
-              <span>Dika Doki Videography</span>
-            </div>
-          </div>
+        <div
+          style={{
+            position: "fixed",
+            bottom: "90px",
+            right: "20px",
+            width: "320px",
+            height: "450px",
+            background: "#111",
+            color: "#fff",
+            borderRadius: "12px",
+            display: "flex",
+            flexDirection: "column",
+            zIndex: 9999,
+          }}
+        >
+          <div style={{ padding: "10px" }}>AI Assistant</div>
 
-          <div className="ai-chat-messages">
-            {messages.map((msg, index) => (
-              <div
-                key={index}
-                className={
-                  msg.role === "user"
-                    ? "ai-chat-message user"
-                    : "ai-chat-message ai"
-                }
-              >
-                {msg.text}
+          <div style={{ flex: 1, overflow: "auto", padding: "10px" }}>
+            {messages.map((msg, i) => (
+              <div key={i}>
+                <b>{msg.role === "user" ? "Kamu" : "AI"}:</b>
+                <div>{msg.text}</div>
               </div>
             ))}
-
-            {loading && (
-              <div className="ai-chat-message ai">AI sedang mengetik...</div>
-            )}
+              {loading && <div>AI sedang mengetik...</div>}
           </div>
 
-          <div className="ai-chat-input">
+          <div style={{ display: "flex" }}>
             <input
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && sendMessage()}
-              placeholder="Tanya paket video..."
+              style={{ flex: 1 }}
             />
-            <button onClick={sendMessage} disabled={loading}>
-              Kirim
-            </button>
+            <button onClick={sendMessage}>Kirim</button>
           </div>
 
           <a
-            className="ai-chat-whatsapp"
             href={`https://wa.me/${whatsappNumber}`}
             target="_blank"
             rel="noreferrer"
+            style={{
+              textAlign: "center",
+              padding: "10px",
+              background: "green",
+              color: "#fff",
+            }}
           >
-            Lanjut WhatsApp
+            WhatsApp
           </a>
         </div>
       )}
