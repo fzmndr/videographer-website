@@ -3,7 +3,7 @@ import { easing } from "../lib/motion";
 
 const WHATSAPP_NUMBER = "6285775355771";
 const WHATSAPP_TEXT =
-  "Halo Dika Doki, saya tertarik dengan jasa videography. Bisa info paket dan harga?";
+  "Hello dikadoki, I am interested in videography services. Can you give information about the packages and prices?";
 
 export default function Hero() {
   const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
