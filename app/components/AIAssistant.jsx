@@ -81,10 +81,10 @@ export default function AIAssistant() {
     <section className="ai-section" id="ai-assistant">
       <div className="container ai-container">
         <div className="ai-header">
-          <span className="section-label">AI Assistant</span>
+          <span className="section-label">Project Planner</span>
           <h2>Confused About Choosing a Video Package?</h2>
           <p>
-            Tell us your event needs, AI will help recommend the most suitable videography package.
+            Tell Us About Your Project Here
           </p>
         </div>
 
