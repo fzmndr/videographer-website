@@ -41,7 +41,7 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: easing }}
           >
-            DIKA DOKI VIDEOGRAPHY
+            DIKADOKI 
           </motion.p>
 
           <h1 id="hero-title" className="hero__title">
@@ -51,7 +51,7 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.08, ease: easing }}
             >
-              Cinematic visuals
+              Visualize
             </motion.span>
             <motion.span
               className="hero__title-line"
@@ -59,7 +59,7 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2, ease: easing }}
             >
-              that feel real
+              Your Imagination
             </motion.span>
           </h1>
 
@@ -69,9 +69,8 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.35, ease: easing }}
           >
-            Videography cinematic untuk wedding, event, brand, dan momen
-            personal — dibuat dengan visual yang emosional, bersih, dan
-            berkelas.
+            Visualize your imagination—whether for personal events, campaigns, or commercial projects—
+            crafted through visuals that are emotive, refined, and distinctly sophisticated
           </motion.p>
 
           <motion.div
@@ -81,7 +80,7 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.5, ease: easing }}
           >
             <a href="#portfolio" className="btn btn--primary">
-              Lihat Portfolio
+              Curated Work
             </a>
 
             <a
@@ -91,7 +90,7 @@ export default function Hero() {
               rel="noopener noreferrer"
               aria-label="Chat Dika Doki via WhatsApp"
             >
-              Booking via WhatsApp
+              Book Your Season
             </a>
           </motion.div>
         </div>
