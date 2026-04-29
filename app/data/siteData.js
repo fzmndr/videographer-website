@@ -58,7 +58,7 @@ export const worksData = [
     id: 1,
     title: "Elegant Ceremony",
     slug: "elegant-ceremony",
-    category: "Party",
+    category: "Brand",
     image: "/images/featured1.jpeg",
     video: "/videos/featured.mp4",
     description:
@@ -71,7 +71,7 @@ export const worksData = [
     id: 2,
     title: "Party Night",
     slug: "party-night",
-    category: "Party",
+    category: "Campaign",
     image: "/images/party1.jpg",
     video: "/videos/wedding.mp4",
     description:
@@ -79,9 +79,9 @@ export const worksData = [
   },
   {
     id: 3,
-    title: "Product Campaign",
-    slug: "product-campaign",
-    category: "Brand",
+    title: "Angker",
+    slug: "Angker",
+    category: "Campaign",
     image: "/images/angker.jpg",
     video: "/videos/angker.mp4",
     description:
@@ -89,9 +89,9 @@ export const worksData = [
   },
   {
     id: 4,
-    title: "Live Experience",
-    slug: "live-experience",
-    category: "Brand",
+    title: "Balenciaga",
+    slug: "Balenciaga",
+    category: "Commercial",
     image: "/images/balenciaga.jpg",
     video: "/videos/balenciaga.mp4",
     description:
@@ -99,9 +99,9 @@ export const worksData = [
   },
   {
     id: 5,
-    title: "Live Quality",
-    slug: "product-campaign",
-    category: "Brand",
+    title: "Hyundai",
+    slug: "Hyundai",
+    category: "Commercial",
     image: "/images/hyundai.jpg",
     video: "/videos/hyundai.mp4",
     description:
@@ -111,7 +111,7 @@ export const worksData = [
     id: 6,
     title: "Lavani",
     slug: "product-campaign",
-    category: "Brand",
+    category: "Commercial",
     image: "/images/lavani.jpg",
     video: "/videos/lavani.mp4",
     description:
@@ -120,8 +120,8 @@ export const worksData = [
   {
     id: 7,
     title: "Mugler",
-    slug: "product-campaign",
-    category: "Brand",
+    slug: "Commercial",
+    category: "Commercial",
     image: "/images/mugler.jpg",
     video: "/videos/mugler.mp4",
     description:
