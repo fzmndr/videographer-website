@@ -2,7 +2,7 @@
 
 const WHATSAPP_NUMBER = "6285775355771";
 const WHATSAPP_TEXT =
-  "Halo Dika Doki, saya tertarik dengan jasa videography. Bisa info paket dan harga?";
+  "Hello DikaDoki, I am interested in videography services. Can you provide information on the packages and prices?";
 
 const INSTAGRAM_URL = "https://www.instagram.com/dikadoki/";
 
@@ -19,7 +19,7 @@ export default function FloatingSocial() {
         className="floating-social__btn floating-social__btn--ig"
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Lihat Instagram Dika Doki"
+        aria-label="Check out DikaDoki's Instagram"
       >
         📸
       </a>

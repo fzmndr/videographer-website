@@ -374,7 +374,7 @@ export default function Works({ setIsPreviewOpen = () => {} }) {
                     <h2>{selectedWork.title}</h2>
                     <p>
                       {selectedWork.description ||
-                        "Visual sinematik dengan pendekatan refined, emosional, dan fokus pada storytelling yang kuat."}
+                        "Cinematic visuals with a refined, emotional approach, and a focus on strong storytelling."}
                     </p>
                   </div>
 
@@ -384,7 +384,7 @@ export default function Works({ setIsPreviewOpen = () => {} }) {
                       className="btn btn--primary"
                       onClick={closePreview}
                     >
-                      Lihat Detail Project
+                      View Project Details
                     </Link>
                   </div>
                 </div>
