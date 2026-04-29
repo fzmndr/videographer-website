@@ -2,7 +2,8 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { staggerWrap, itemVariants, viewportDefault } from "../lib/motion";
 
-const WHATSAPP_NUMBER = "6285775355771";
+// Mengambil nomor dari Environment Variable untuk keamanan
+const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER;
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -23,6 +24,7 @@ export default function Contact() {
       [name]: value,
     }));
 
+    // Reset error saat user mulai mengetik ulang
     if (error) setError("");
   };
 
@@ -33,6 +35,7 @@ export default function Contact() {
   const handleWhatsAppSubmit = (e) => {
     e.preventDefault();
 
+    // Pertahanan Dasar: Sanitasi & Validasi Input
     const name = formData.name.trim();
     const email = formData.email.trim();
     const projectType = formData.projectType.trim();
@@ -50,6 +53,7 @@ export default function Contact() {
 
     setIsSending(true);
 
+    // Menyusun template pesan WhatsApp
     const text = encodeURIComponent(
       `Halo Dika Doki,
 
@@ -67,6 +71,7 @@ Please provide information about the package, estimated price, and schedule avai
 
     const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${text}`;
 
+    // Membuka WhatsApp di tab baru dengan rel="noopener" untuk keamanan browser
     window.open(whatsappUrl, "_blank", "noopener,noreferrer");
 
     setTimeout(() => {
@@ -98,7 +103,7 @@ Please provide information about the package, estimated price, and schedule avai
 
             <div className="contact__quick">
               <a
-                href="mailto:hello@dikadoki.com"
+                href="mailto:dikadokipersonal@gmail.com"
                 className="contact__quick-link"
                 aria-label="Kirim email ke Dika Doki"
               >

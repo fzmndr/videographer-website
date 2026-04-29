@@ -1,6 +1,9 @@
 import { motion } from "framer-motion";
 import { staggerWrap, itemVariants, viewportDefault } from "../lib/motion";
 
+// Mengambil nomor dari Environment Variable
+const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER;
+
 export default function Footer() {
   return (
     <footer className="footer">
@@ -35,12 +38,16 @@ export default function Footer() {
           <div>
             <p className="footer__heading">Connect</p>
             <ul>
-              <li><a href="mailto:hello@dikadoki.com">Email</a></li>
+              <li>
+                <a href="mailto:dikadokipersonal@gmail.com">
+                  Email
+                </a>
+              </li>
               <li>
                 <a
-                  href="https://wa.me/6285775355771"
+                  href={`https://wa.me/${WHATSAPP_NUMBER}`}
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                 >
                   WhatsApp
                 </a>
@@ -49,7 +56,7 @@ export default function Footer() {
                 <a
                   href="https://www.instagram.com/dikadoki/"
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                 >
                   Instagram
                 </a>
