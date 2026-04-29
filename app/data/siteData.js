@@ -62,7 +62,7 @@ export const worksData = [
     image: "/images/featured1.jpeg",
     video: "/videos/featured.mp4",
     description:
-      "Dokumentasi Party dengan pendekatan visual yang lembut, intimate, dan sinematik.",
+      "Party documentation with a soft, intimate, and cinematic visual approach.",
     client: "Private Client",
     year: "2026",
     services: ["Videography", "Editing", "Color Grading"],
@@ -75,7 +75,7 @@ export const worksData = [
     image: "/images/party1.jpg",
     video: "/videos/wedding.mp4",
     description:
-      "Visual sinematik dengan pendekatan refined, emosional, dan fokus pada storytelling yang kuat.",
+      "Cinematic visuals with a refined, emotional approach, and a focus on strong storytelling.",
   },
   {
     id: 3,
@@ -85,7 +85,7 @@ export const worksData = [
     image: "/images/angker.jpg",
     video: "/videos/angker.mp4",
     description:
-      "Campaign visual yang modern, cinematic, dan berkarakter kuat untuk kebutuhan brand.",
+      "A modern, cinematic, and strong-character campaign visual for brand needs.",
   },
   {
     id: 4,
@@ -95,7 +95,7 @@ export const worksData = [
     image: "/images/balenciaga.jpg",
     video: "/videos/balenciaga.mp4",
     description:
-      "Dokumentasi visual yang menangkap energi event dengan ritme yang dinamis.",
+      "Visual documentation that captures the energy of the event with a dynamic rhythm.",
   },
   {
     id: 5,
@@ -105,7 +105,7 @@ export const worksData = [
     image: "/images/hyundai.jpg",
     video: "/videos/hyundai.mp4",
     description:
-      "Dokumentasi visual yang menangkap energi event dengan ritme yang dinamis.",
+      "Visual documentation that captures the energy of the event with a dynamic rhythm.",
   },
   {
     id: 6,
@@ -115,7 +115,7 @@ export const worksData = [
     image: "/images/lavani.jpg",
     video: "/videos/lavani.mp4",
     description:
-      "Lavani Dengan Project Yang Memanjakan Mata",
+      "Lavani With a Project That Delights the Eyes in Front of You",
   },
   {
     id: 7,
@@ -125,6 +125,6 @@ export const worksData = [
     image: "/images/mugler.jpg",
     video: "/videos/mugler.mp4",
     description:
-      "Mugler Suatu Inovasi Yang Akan membawa anda kedalam visual modern",
+      "Mugler, an innovation that will bring you into a modern visual",
   },
 ];
