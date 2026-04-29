@@ -7,7 +7,7 @@ const featuredProject = {
   category: "Party",
   image: "/images/featured1.jpeg",
   description:
-    "Dokumentasi Party dengan pendekatan visual yang lembut, intimate, dan sinematik.",
+    "Party documentation with a soft, intimate, and cinematic visual approach.",
 };
 
 export default function FeaturedProject() {
