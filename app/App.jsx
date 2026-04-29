@@ -3,6 +3,10 @@ import Lenis from "lenis";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 
+// Analytics
+import { Analytics } from "@vercel/analytics/react";
+
+// Components
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import Works from "./components/Works";
@@ -19,6 +23,7 @@ import InstagramPreview from "./components/InstagramPreview";
 import AIAssistant from "./components/AIAssistant";
 import AIChat from "./components/AIChat";
 
+// Pages
 import ProjectDetail from "./pages/ProjectDetail";
 
 function Home({ setIsPreviewOpen }) {
@@ -43,6 +48,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
 
+  // Smooth Scroll Initialization (Lenis)
   useEffect(() => {
     const lenis = new Lenis({
       duration: 1.1,
@@ -64,6 +70,7 @@ function App() {
     };
   }, []);
 
+  // Fake Loading Timer
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
@@ -72,6 +79,7 @@ function App() {
     return () => clearTimeout(timer);
   }, []);
 
+  // Handling Scroll to Section on Route Change
   useEffect(() => {
     if (location.pathname === "/" && location.state?.scrollTo) {
       const targetId = location.state.scrollTo;
@@ -92,6 +100,7 @@ function App() {
         <LoadingScreen key="loading" isLoading={isLoading} />
       ) : (
         <>
+          {/* Global UI Components */}
           <CustomCursor />
           <Navbar isPreviewOpen={isPreviewOpen} />
 
@@ -113,6 +122,9 @@ function App() {
           </AnimatePresence>
 
           <Footer />
+
+          {/* Vercel Analytics Tracker */}
+          <Analytics />
         </>
       )}
     </AnimatePresence>
