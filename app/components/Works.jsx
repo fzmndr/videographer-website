@@ -170,7 +170,7 @@ export default function Works({ setIsPreviewOpen = () => {} }) {
           <p className="works__label">CURATED WORKS</p>
 
           <RevealText as="h2" className="works__title" delay={0.08}>
-            Karya Pilihan
+            Selected Works
           </RevealText>
 
           <motion.p

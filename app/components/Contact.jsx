@@ -92,7 +92,8 @@ Please provide information about the package, estimated price, and schedule avai
             </h2>
 
             <p className="contact__text">
-              Open for brand projects, events, weddings, and other visual collaborations. Share your needs, and let's realize them with a strong and elegant visual direction.
+              Open to collaborations across a wide range of visual projects.
+              Bring your ideas, and let’s shape them into something refined, intentional, and visually compelling.
             </p>
 
             <div className="contact__quick">
@@ -125,7 +126,7 @@ Please provide information about the package, estimated price, and schedule avai
               <input
                 type="text"
                 name="name"
-                placeholder="Nama Anda"
+                placeholder="Your Name"
                 value={formData.name}
                 onChange={handleChange}
                 autoComplete="name"

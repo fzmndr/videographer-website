@@ -78,17 +78,16 @@ export default function ProjectDetail() {
           <div className="project-detail__story-text">
             <p>{project.description}</p>
             <p>
-              Setiap project ditampilkan dengan pendekatan visual yang sinematik,
-              rapi, dan fokus pada pengalaman audiens.
+              Each project is presented with a cinematic visual approach, neat, and focused on the audience experience.
             </p>
           </div>
         </div>
 
         <div className="project-detail__cta">
           <p className="project-detail__section-label">Let’s work together</p>
-          <h2>Punya project dengan visual yang lebih kuat?</h2>
+          <h2>Do you have a project with stronger visuals?</h2>
           <a href="/#contact" className="btn btn--primary">
-            Mulai Diskusi
+            Start Discussion
           </a>
         </div>
       </div>

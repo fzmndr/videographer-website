@@ -66,7 +66,7 @@ export default function Footer() {
         whileInView="show"
         viewport={{ once: true, amount: 0.6 }}
       >
-        <p>© 2026 DikaDoki. Crafted with intention.</p>
+        <p>© 2026 dikadoki. Crafted with intention.</p>
       </motion.div>
     </footer>
   );

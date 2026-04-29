@@ -18,7 +18,7 @@ export default function LoadingScreen({ isLoading }) {
             exit={{ opacity: 0, y: -12 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            <p className="loading-screen__eyebrow">Videography Studio</p>
+            <p className="loading-screen__eyebrow"></p>
             <h1 className="loading-screen__title">dikadoki</h1>
             <span className="loading-screen__line" />
           </motion.div>
