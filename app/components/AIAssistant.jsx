@@ -10,6 +10,7 @@ export default function AIAssistant() {
   });
 
   const [result, setResult] = useState("");
+  const [isError, setIsError] = useState(false);
 
   const formatRupiah = (value) => {
     const angka = value.replace(/\D/g, "");
@@ -35,6 +36,7 @@ export default function AIAssistant() {
 
   const generateRecommendation = async () => {
     setResult("AI is making recommendations...");
+    setIsError(false);
 
     try {
       const response = await fetch("/api/recommend-package", {
@@ -56,11 +58,23 @@ export default function AIAssistant() {
 
       setResult(data.result);
     } catch (error) {
-      setResult("Sorry, the AI is having problems. Please try again in a moment.");
+      setIsError(true);
+      setResult("Sorry, the AI is having problems. Please click the button below to consult via WhatsApp.");
     }
   };
 
-  const whatsappText = encodeURIComponent(result);
+  // LOGIKA PESAN WHATSAPP
+  // Jika AI sukses, pakai 'result'. Jika error/kosong, pakai detail dari form.
+  const fallbackText = `Halo Dikadoki, saya ingin konsultasi paket videografi:
+- Acara: ${form.event || "-"}
+- Lokasi: ${form.location || "-"}
+- Durasi: ${form.duration || "-"}
+- Drone: ${form.drone || "-"}
+- Budget: Rp${form.budget || "-"}`;
+
+  const finalMessage = (isError || !result || result.includes("AI is making")) ? fallbackText : result;
+  
+  const whatsappText = encodeURIComponent(finalMessage);
   const whatsappNumber = "6285775355771";
 
   return (
@@ -106,7 +120,7 @@ export default function AIAssistant() {
             name="budget"
             type="text"
             inputMode="numeric"
-            placeholder="Your budget, for example: 10,000,000"
+            placeholder="Your budget, for example: 10.000.000"
             value={form.budget}
             onChange={handleChange}
           />
@@ -115,17 +129,27 @@ export default function AIAssistant() {
             Get Recommendations
           </button>
 
-          {result && (
+          {/* Menampilkan hasil atau link WhatsApp jika salah satu input terisi */}
+          {(result || form.event) && (
             <div className="ai-result">
-              <pre>{result}</pre>
+              {result && <pre style={{ whiteSpace: 'pre-wrap' }}>{result}</pre>}
 
               <a
                 href={`https://wa.me/${whatsappNumber}?text=${whatsappText}`}
                 target="_blank"
                 rel="noreferrer"
                 className="ai-whatsapp"
+                style={{
+                    marginTop: '10px',
+                    display: 'inline-block',
+                    padding: '10px 20px',
+                    backgroundColor: '#25D366',
+                    color: 'white',
+                    borderRadius: '5px',
+                    textDecoration: 'none'
+                }}
               >
-                Send to WhatsApp
+                {isError ? "Hubungi Admin via WhatsApp" : "Kirim ke WhatsApp"}
               </a>
             </div>
           )}

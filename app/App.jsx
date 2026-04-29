@@ -16,6 +16,7 @@ import LoadingScreen from "./components/LoadingScreen";
 import FeaturedProject from "./components/FeaturedProject";
 import FloatingWhatsApp from "./components/FloatingWhatsApp";
 import InstagramPreview from "./components/InstagramPreview";
+import AIAssistant from "./components/AIAssistant";
 import AIChat from "./components/AIChat";
 
 import ProjectDetail from "./pages/ProjectDetail";
