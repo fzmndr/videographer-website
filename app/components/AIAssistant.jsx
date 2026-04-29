@@ -125,9 +125,6 @@ export default function AIAssistant() {
             onChange={handleChange}
           />
 
-          <button onClick={generateRecommendation}>
-            Get Recommendations
-          </button>
 
           {/* Menampilkan hasil atau link WhatsApp jika salah satu input terisi */}
           {(result || form.event) && (
