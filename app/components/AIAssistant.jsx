@@ -75,7 +75,7 @@ export default function AIAssistant() {
   const finalMessage = (isError || !result || result.includes("AI is making")) ? fallbackText : result;
   
   const whatsappText = encodeURIComponent(finalMessage);
-  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER;
+  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "6285775355771";
 
   return (
     <section className="ai-section" id="ai-assistant">

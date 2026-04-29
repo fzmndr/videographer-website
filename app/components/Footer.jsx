@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
 import { staggerWrap, itemVariants, viewportDefault } from "../lib/motion";
 
-// Mengambil nomor dari Environment Variable
-const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER;
+// PERBAIKAN: Gunakan nomor cadangan jika sistem .env gagal dimuat
+const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "6285775355771";
 
 export default function Footer() {
   return (

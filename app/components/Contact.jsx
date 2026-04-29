@@ -2,8 +2,8 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { staggerWrap, itemVariants, viewportDefault } from "../lib/motion";
 
-// Mengambil nomor dari Environment Variable untuk keamanan
-const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER;
+// PERBAIKAN: Tambahkan nomor cadangan jika process.env gagal dimuat
+const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "6285775355771";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -24,7 +24,6 @@ export default function Contact() {
       [name]: value,
     }));
 
-    // Reset error saat user mulai mengetik ulang
     if (error) setError("");
   };
 
@@ -35,7 +34,6 @@ export default function Contact() {
   const handleWhatsAppSubmit = (e) => {
     e.preventDefault();
 
-    // Pertahanan Dasar: Sanitasi & Validasi Input
     const name = formData.name.trim();
     const email = formData.email.trim();
     const projectType = formData.projectType.trim();
@@ -53,7 +51,6 @@ export default function Contact() {
 
     setIsSending(true);
 
-    // Menyusun template pesan WhatsApp
     const text = encodeURIComponent(
       `Halo Dika Doki,
 
@@ -69,9 +66,9 @@ ${message}
 Please provide information about the package, estimated price, and schedule availability.`
     );
 
+    // Sekarang URL ini tidak akan lagi menghasilkan 'undefined'
     const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${text}`;
 
-    // Membuka WhatsApp di tab baru dengan rel="noopener" untuk keamanan browser
     window.open(whatsappUrl, "_blank", "noopener,noreferrer");
 
     setTimeout(() => {
