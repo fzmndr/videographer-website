@@ -34,7 +34,7 @@ export default function AIAssistant() {
   };
 
   const generateRecommendation = async () => {
-    setResult("AI sedang membuat rekomendasi...");
+    setResult("AI is making recommendations...");
 
     try {
       const response = await fetch("/api/recommend-package", {
@@ -51,12 +51,12 @@ export default function AIAssistant() {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || "Terjadi kesalahan.");
+        throw new Error(data.error || "An error occurred.");
       }
 
       setResult(data.result);
     } catch (error) {
-      setResult("Maaf, AI sedang bermasalah. Coba lagi sebentar.");
+      setResult("Sorry, the AI is having problems. Please try again in a moment.");
     }
   };
 
@@ -68,52 +68,51 @@ export default function AIAssistant() {
       <div className="container ai-container">
         <div className="ai-header">
           <span className="section-label">AI Assistant</span>
-          <h2>Bingung Pilih Paket Video?</h2>
+          <h2>Confused About Choosing a Video Package?</h2>
           <p>
-            Ceritakan kebutuhan acara kamu, AI akan bantu rekomendasikan paket
-            videografi yang paling cocok.
+            Tell us your event needs, AI will help recommend the most suitable videography package.
           </p>
         </div>
 
         <div className="ai-card">
           <input
             name="event"
-            placeholder="Jenis acara, contoh: Wedding / Engagement / Event"
+            placeholder="Type of event, for example: Wedding / Engagement / Event"
             value={form.event}
             onChange={handleChange}
           />
 
           <input
             name="location"
-            placeholder="Lokasi acara"
+            placeholder="Event location"
             value={form.location}
             onChange={handleChange}
           />
 
           <input
             name="duration"
-            placeholder="Durasi, contoh: 4 jam / full day"
+            placeholder="Duration, example: 4 hours / full day"
             value={form.duration}
             onChange={handleChange}
           />
 
           <select name="drone" value={form.drone} onChange={handleChange}>
-            <option value="">Butuh drone?</option>
-            <option value="yes">Ya</option>
-            <option value="no">Tidak</option>
+            <option value="">Need a drone?</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
           </select>
 
           <input
             name="budget"
             type="text"
             inputMode="numeric"
-            placeholder="Budget kamu, contoh: 10.000.000"
+            placeholder="Your budget, for example: 10,000,000"
             value={form.budget}
             onChange={handleChange}
           />
 
           <button onClick={generateRecommendation}>
-            Dapatkan Rekomendasi
+            Get Recommendations
           </button>
 
           {result && (
@@ -126,7 +125,7 @@ export default function AIAssistant() {
                 rel="noreferrer"
                 className="ai-whatsapp"
               >
-                Kirim ke WhatsApp
+                Send to WhatsApp
               </a>
             </div>
           )}

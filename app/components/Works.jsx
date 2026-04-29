@@ -10,7 +10,7 @@ import {
 import { worksData } from "../data/siteData";
 import RevealText from "./RevealText";
 
-const filters = ["All", "Party", "Brand", "Event"];
+const filters = ["All", "Commercial", "Campaign", "Brand"];
 const easing = [0.22, 1, 0.36, 1];
 
 export default function Works({ setIsPreviewOpen = () => {} }) {
@@ -167,7 +167,7 @@ export default function Works({ setIsPreviewOpen = () => {} }) {
           whileInView="show"
           viewport={{ once: true, amount: 0.25 }}
         >
-          <p className="works__label">SELECTED WORKS</p>
+          <p className="works__label">CURATED WORKS</p>
 
           <RevealText as="h2" className="works__title" delay={0.08}>
             Karya Pilihan
@@ -180,8 +180,7 @@ export default function Works({ setIsPreviewOpen = () => {} }) {
             viewport={{ once: true, amount: 0.25 }}
             transition={{ duration: 0.75, delay: 0.14, ease: easing }}
           >
-            Pilihan project dengan pendekatan visual yang sinematik, refined,
-            dan berkarakter.
+           A curated selection of projects defined by a cinematic approach—refined, distinctive, and rich in character.
           </motion.p>
         </motion.div>
 

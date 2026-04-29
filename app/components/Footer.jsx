@@ -12,7 +12,7 @@ export default function Footer() {
         viewport={viewportDefault}
       >
         <motion.div className="footer__brand" variants={itemVariants}>
-          <p className="footer__eyebrow">Dika Doki</p>
+          <p className="footer__eyebrow">DikaDoki</p>
           <h3>Visual stories with emotion, clarity, and intention.</h3>
           <p className="footer__text">
             Cinematic visuals for brands, events, and personal moments with a
@@ -47,7 +47,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="https://instagram.com/"
+                  href="https://www.instagram.com/dikadoki/"
                   target="_blank"
                   rel="noreferrer"
                 >
@@ -66,7 +66,7 @@ export default function Footer() {
         whileInView="show"
         viewport={{ once: true, amount: 0.6 }}
       >
-        <p>© 2026 Dika Doki. Crafted with intention.</p>
+        <p>© 2026 DikaDoki. Crafted with intention.</p>
       </motion.div>
     </footer>
   );

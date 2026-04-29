@@ -64,7 +64,9 @@ function About() {
 
             <motion.div variants={itemVariants}>
               <p>About</p>
-              <h3>Kreatif, detail, dan fokus pada cerita visual</h3>
+              <h3>A creative vision shaped by precision 
+                  and brought to life through compelling 
+                  visual storytelling.</h3>
             </motion.div>
           </div>
 

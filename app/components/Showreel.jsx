@@ -18,7 +18,8 @@ export default function Showreel() {
                 Cinematic Highlights
             </RevealText>
             <p className="showreel__text">
-                Potongan visual pilihan yang mewakili gaya, mood, dan kualitas karya kami.
+                An exclusive glimpse into my signature works—where storytelling 
+                meets elegance, and every visual is thoughtfully composed.
             </p>
         </motion.div>
 
@@ -43,7 +44,7 @@ export default function Showreel() {
 
           <div className="showreel__overlay">
             <div className="showreel__content">
-              <span className="showreel__kicker">Videography Studio</span>
+              <span className="showreel__kicker">Signature works</span>
               <h3>Visuals crafted to feel immersive, clean, and memorable.</h3>
             </div>
           </div>

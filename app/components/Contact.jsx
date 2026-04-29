@@ -39,12 +39,12 @@ export default function Contact() {
     const message = formData.message.trim();
 
     if (!name || !email || !message) {
-      setError("Mohon isi nama, email, dan pesan terlebih dahulu.");
+      setError("Please fill in your name, email, and message first.");
       return;
     }
 
     if (!isValidEmail(email)) {
-      setError("Mohon masukkan email yang valid.");
+      setError("Please enter a valid email.");
       return;
     }
 
@@ -53,7 +53,7 @@ export default function Contact() {
     const text = encodeURIComponent(
       `Halo Dika Doki,
 
-Saya tertarik untuk konsultasi project videography.
+I am interested in consulting on a videography project.
 
 Nama: ${name}
 Email: ${email}
@@ -62,7 +62,7 @@ Jenis Project: ${projectType || "-"}
 Pesan:
 ${message}
 
-Mohon info paket, estimasi harga, dan ketersediaan jadwalnya.`
+Please provide information about the package, estimated price, and schedule availability.`
     );
 
     const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${text}`;
@@ -92,9 +92,7 @@ Mohon info paket, estimasi harga, dan ketersediaan jadwalnya.`
             </h2>
 
             <p className="contact__text">
-              Terbuka untuk project brand, event, wedding, dan kolaborasi visual
-              lainnya. Ceritakan kebutuhan Anda, dan mari wujudkan dengan arah
-              visual yang kuat dan elegan.
+              Open for brand projects, events, weddings, and other visual collaborations. Share your needs, and let's realize them with a strong and elegant visual direction.
             </p>
 
             <div className="contact__quick">
@@ -103,17 +101,17 @@ Mohon info paket, estimasi harga, dan ketersediaan jadwalnya.`
                 className="contact__quick-link"
                 aria-label="Kirim email ke Dika Doki"
               >
-                hello@dikadoki.com
+                dikadokipersonal@gmail.com 
               </a>
 
               <a
                 href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
-                  "Halo Dika Doki, saya tertarik dengan jasa videography. Bisa info paket dan harga?"
+                  "Hello dikadoki, I am interested in videography services. Can you provide information on the packages and prices?"
                 )}`}
                 className="contact__quick-link"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Chat Dika Doki via WhatsApp"
+                aria-label="Chat dika doki via WhatsApp"
               >
                 WhatsApp
               </a>
@@ -147,14 +145,14 @@ Mohon info paket, estimasi harga, dan ketersediaan jadwalnya.`
               <input
                 type="text"
                 name="projectType"
-                placeholder="Jenis project, contoh: Wedding / Event / Brand"
+                placeholder="Type of project, example: Wedding / Event / Brand"
                 value={formData.projectType}
                 onChange={handleChange}
               />
 
               <textarea
                 name="message"
-                placeholder="Ceritakan kebutuhan, lokasi, tanggal acara, dan konsep yang diinginkan"
+                placeholder="Describe the needs, location, event date, and desired concept"
                 value={formData.message}
                 onChange={handleChange}
                 rows="5"
@@ -165,9 +163,9 @@ Mohon info paket, estimasi harga, dan ketersediaan jadwalnya.`
                 type="submit"
                 className="btn btn--primary"
                 disabled={isSending}
-                aria-label="Kirim form konsultasi via WhatsApp"
+                aria-label="Send the consultation form via WhatsApp"
               >
-                {isSending ? "Membuka WhatsApp..." : "Kirim via WhatsApp"}
+                {isSending ? "Opening WhatsApp..." : "Send via WhatsApp"}
               </button>
 
               {error && (
