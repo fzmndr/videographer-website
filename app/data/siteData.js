@@ -56,26 +56,26 @@ export const testimonials = [
 export const worksData = [
   {
     id: 1,
-    title: "Elegant Ceremony",
-    slug: "elegant-ceremony",
+    title: "Victoria Secret",
+    slug: "Victoria-Secret",
     category: "Brand",
     image: "/images/featured1.jpeg",
     video: "/videos/featured.mp4",
     description:
-      "Party documentation with a soft, intimate, and cinematic visual approach.",
+      "Bold. Radiant. Unforgettable—capturing the essence of Bombshell",
     client: "Private Client",
     year: "2026",
     services: ["Videography", "Editing", "Color Grading"],
   },
   {
     id: 2,
-    title: "Party Night",
-    slug: "party-night",
+    title: "Artotel Thamrin",
+    slug: "artotel-thamrin",
     category: "Campaign",
     image: "/images/party1.jpg",
     video: "/videos/wedding.mp4",
     description:
-      "Cinematic visuals with a refined, emotional approach, and a focus on strong storytelling.",
+      "A refined moment captured in the heart of Thamrin—where light, motion, and style meet in perfect balance.",
   },
   {
     id: 3,
@@ -126,5 +126,15 @@ export const worksData = [
     video: "/videos/mugler.mp4",
     description:
       "Mugler, an innovation that will bring you into a modern visual",
+  },
+  {
+    id: 8,
+    title: "Vespa 80th",
+    slug: "Brand",
+    category: "Brand",
+    image: "/images/vespa.jpg",
+    video: "/videos/vespa.mov",
+    description:
+      "80 years in motion—where timeless design meets a legacy of freedom.",
   },
 ];
