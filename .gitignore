@@ -4,3 +4,4 @@ dist
 .env.local
 .env.production
 .env*.local
+echo "public/videos/vespa.mov" 
