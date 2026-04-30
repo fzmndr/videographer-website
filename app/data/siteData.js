@@ -133,7 +133,7 @@ export const worksData = [
     slug: "Brand",
     category: "Brand",
     image: "/images/vespa.jpg",
-    video: "/videos/vespa.mov",
+    video: "/videos/vespa.mp4",
     description:
       "80 years in motion—where timeless design meets a legacy of freedom.",
   },
