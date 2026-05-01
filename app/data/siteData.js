@@ -137,4 +137,24 @@ export const worksData = [
     description:
       "80 years in motion—where timeless design meets a legacy of freedom.",
   },
+  {
+    id: 9,
+    title: "Adidas",
+    slug: "Brand",
+    category: "Brand",
+    image: "/images/adidas.jpg",
+    video: "/videos/adidas.mp4",
+    description:
+      "A sleek and modern Adidas retail scene, capturing effortless motion, clean lines, and a refined sporty aesthetic.",
+  },
+  {
+    id: 10,
+    title: "YSL",
+    slug: "Brand",
+    category: "Brand",
+    image: "/images/ysl.jpg",
+    video: "/videos/ysl.mp4",
+    description:
+      "A refined expression of luxury by Yves Saint Laurent—timeless elegance captured in a single, captivating scent.",
+  },
 ];
