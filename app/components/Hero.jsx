@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { easing } from "../lib/motion";
 import { useState, useEffect } from "react";
+import LoadingScreen from "./LoadingScreen"; // Pastikan path ini sesuai dengan struktur folder Anda
 
 const WHATSAPP_NUMBER = "6285775355771";
 const WHATSAPP_TEXT =
@@ -13,10 +14,10 @@ export default function Hero() {
 
   // State untuk menyimpan data video yang terpilih
   const [activeVideo, setActiveVideo] = useState(null);
+  // State krusial untuk menghubungkan Hero dengan Loading Screen
+  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
 
   useEffect(() => {
-    // Daftar video yang akan diacak. 
-    // Anda bisa menambahkan lebih dari 2 video di sini jika mau.
     const videoList = [
       {
         id: "v1",
@@ -32,104 +33,110 @@ export default function Hero() {
       }
     ];
 
-    // Logika untuk memilih salah satu video secara acak (50:50)
     const randomSelection = videoList[Math.floor(Math.random() * videoList.length)];
     setActiveVideo(randomSelection);
   }, []);
 
   return (
-    <section id="home" className="hero" aria-labelledby="hero-title">
-      <motion.div
-        className="hero__bg"
-        initial={{ scale: 1.06, opacity: 0.7 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ duration: 1.4, ease: easing }}
-      >
-        {/* Render video 100% penuh hanya jika state activeVideo sudah terpilih */}
-        {activeVideo && (
-          <video
-            key={activeVideo.id} // Key penting agar React tahu kalau video berubah
-            className="hero__bg-video"
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="metadata"
-            poster={activeVideo.poster}
-            aria-hidden="true"
-            style={{ width: "100%", height: "100%", objectFit: "cover" }}
-          >
-            {/* Format ganda untuk stabilitas lintas browser */}
-            <source src={activeVideo.webm} type="video/webm" />
-            <source src={activeVideo.mp4} type="video/mp4" />
-          </video>
-        )}
-        
-        <div className="hero__bg-overlay" />
-      </motion.div>
+    <>
+      {/* Loading Screen menutupi layar sampai video benar-benar siap diputar */}
+      <LoadingScreen isLoading={!isVideoLoaded} />
 
-      <div className="container hero__content">
-        <div className="hero__inner">
-          <motion.p
-            className="hero__eyebrow"
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: easing }}
-          >
-            DIKADOKI
-          </motion.p>
+      <section id="home" className="hero" aria-labelledby="hero-title">
+        <motion.div
+          className="hero__bg"
+          initial={{ scale: 1.06, opacity: 0.7 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 1.4, ease: easing }}
+        >
+          {activeVideo && (
+            <video
+              key={activeVideo.id} 
+              className="hero__bg-video"
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="auto" // Diubah ke 'auto' agar browser langsung mendownload video
+              poster={activeVideo.poster}
+              aria-hidden="true"
+              style={{ width: "100%", height: "100%", objectFit: "cover" }}
+              // Trigger ini akan mematikan Loading Screen saat frame video pertama siap diputar tanpa buffering
+              onCanPlayThrough={() => setIsVideoLoaded(true)}
+            >
+              <source src={activeVideo.webm} type="video/webm" />
+              <source src={activeVideo.mp4} type="video/mp4" />
+            </video>
+          )}
+          
+          <div className="hero__bg-overlay" />
+        </motion.div>
 
-          <h1 id="hero-title" className="hero__title">
-            <motion.span
-              className="hero__title-line"
-              initial={{ opacity: 0, y: 28 }}
+        <div className="container hero__content">
+          <div className="hero__inner">
+            <motion.p
+              className="hero__eyebrow"
+              initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.08, ease: easing }}
+              transition={{ duration: 0.7, ease: easing }}
             >
-              Visualize
-            </motion.span>
-            <motion.span
-              className="hero__title-line"
-              initial={{ opacity: 0, y: 28 }}
+              DIKADOKI
+            </motion.p>
+
+            <h1 id="hero-title" className="hero__title">
+              <motion.span
+                className="hero__title-line"
+                initial={{ opacity: 0, y: 28 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.08, ease: easing }}
+                style={{ display: "block" }} // Tambahan safety agar animasi Y berfungsi sempurna pada span
+              >
+                Visualize
+              </motion.span>
+              <motion.span
+                className="hero__title-line"
+                initial={{ opacity: 0, y: 28 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2, ease: easing }}
+                style={{ display: "block" }} // Tambahan safety
+              >
+                Your Imagination
+              </motion.span>
+            </h1>
+
+            <motion.p
+              className="hero__text"
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2, ease: easing }}
+              transition={{ duration: 0.8, delay: 0.35, ease: easing }}
             >
-              Your Imagination
-            </motion.span>
-          </h1>
+              Visualize your imagination—whether for personal events, campaigns, or commercial projects—
+              crafted through visuals that are emotive, refined, and distinctly sophisticated
+            </motion.p>
 
-          <motion.p
-            className="hero__text"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.35, ease: easing }}
-          >
-            Visualize your imagination—whether for personal events, campaigns, or commercial projects—
-            crafted through visuals that are emotive, refined, and distinctly sophisticated
-          </motion.p>
-
-          <motion.div
-            className="hero__actions"
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.5, ease: easing }}
-          >
-            <a href="#portfolio" className="btn btn--primary">
-              Curated Work
-            </a>
-
-            <a
-              href={whatsappUrl}
-              className="btn btn--secondary"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Chat Dika Doki via WhatsApp"
+            <motion.div
+              className="hero__actions"
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.5, ease: easing }}
             >
-              Book Your Season
-            </a>
-          </motion.div>
+              <a href="#portfolio" className="btn btn--primary">
+                Curated Work
+              </a>
+
+              <a
+                href={whatsappUrl}
+                className="btn btn--secondary"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Chat Dika Doki via WhatsApp"
+              >
+                Book Your Season
+              </a>
+            </motion.div>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }
