@@ -46,14 +46,7 @@ export default function LoadingScreen({ isLoading }) {
             exit={{ opacity: 0, y: -30, scale: 0.95 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            <motion.p 
-              className="loading-screen__eyebrow"
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.5 }}
-            >
-              Welcome to
-            </motion.p>
+            {/* Bagian teks "Welcome to" sudah dihapus total dari sini */}
 
             <motion.h1
               className="loading-screen__title"
@@ -79,9 +72,8 @@ export default function LoadingScreen({ isLoading }) {
                 className="loading-screen__line"
                 initial={{ scaleX: 0 }}
                 animate={{ scaleX: 1 }}
-                // Durasi garis bisa disesuaikan dengan perkiraan waktu loading-mu
                 transition={{ duration: 1.5, ease: "easeInOut", delay: 0.8 }} 
-                style={{ transformOrigin: "left" }} // Memastikan garis memanjang dari kiri ke kanan
+                style={{ transformOrigin: "left" }} 
               />
             </motion.div>
           </motion.div>
