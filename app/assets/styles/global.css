@@ -2187,6 +2187,7 @@ textarea:focus-visible {
   align-items: center;
   justify-content: center;
   padding: 24px;
+  overflow: hidden;
 }
 
 .loading-screen__inner {
@@ -2207,6 +2208,15 @@ textarea:focus-visible {
   letter-spacing: -0.06em;
   color: #fff;
   margin-bottom: 18px;
+  perspective: 1000px;
+}
+
+.loading-screen__line-container {
+  width: 72px; 
+  height: 1px; 
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.1); 
+  overflow: hidden;
 }
 
 .loading-screen__line {
@@ -2214,7 +2224,8 @@ textarea:focus-visible {
   width: 72px;
   height: 1px;
   margin: 0 auto;
-  background: rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.8);
+  transform-origin: left;
 }
 
 /* FLOATING SOCIAL MEDIA */
