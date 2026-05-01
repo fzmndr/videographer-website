@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { easing } from "../lib/motion";
+import { useState, useEffect } from "react";
 
 const WHATSAPP_NUMBER = "6285775355771";
 const WHATSAPP_TEXT =
@@ -10,6 +11,32 @@ export default function Hero() {
     WHATSAPP_TEXT
   )}`;
 
+  // State untuk menyimpan data video yang terpilih
+  const [activeVideo, setActiveVideo] = useState(null);
+
+  useEffect(() => {
+    // Daftar video yang akan diacak. 
+    // Anda bisa menambahkan lebih dari 2 video di sini jika mau.
+    const videoList = [
+      {
+        id: "v1",
+        webm: "/videos/hero1.webm",
+        mp4: "/videos/hero1.mp4",
+        poster: "/images/hero-poster-1.jpg"
+      },
+      {
+        id: "v2",
+        webm: "/videos/hero2.webm",
+        mp4: "/videos/hero2.mp4",
+        poster: "/images/hero2.jpg"
+      }
+    ];
+
+    // Logika untuk memilih salah satu video secara acak (50:50)
+    const randomSelection = videoList[Math.floor(Math.random() * videoList.length)];
+    setActiveVideo(randomSelection);
+  }, []);
+
   return (
     <section id="home" className="hero" aria-labelledby="hero-title">
       <motion.div
@@ -18,18 +45,26 @@ export default function Hero() {
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 1.4, ease: easing }}
       >
-        <video
-          className="hero__bg-video"
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          poster="/images/hero-poster.jpg"
-          aria-hidden="true"
-        >
-          <source src="/videos/hero.mp4" type="video/mp4" />
-        </video>
+        {/* Render video 100% penuh hanya jika state activeVideo sudah terpilih */}
+        {activeVideo && (
+          <video
+            key={activeVideo.id} // Key penting agar React tahu kalau video berubah
+            className="hero__bg-video"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            poster={activeVideo.poster}
+            aria-hidden="true"
+            style={{ width: "100%", height: "100%", objectFit: "cover" }}
+          >
+            {/* Format ganda untuk stabilitas lintas browser */}
+            <source src={activeVideo.webm} type="video/webm" />
+            <source src={activeVideo.mp4} type="video/mp4" />
+          </video>
+        )}
+        
         <div className="hero__bg-overlay" />
       </motion.div>
 
@@ -41,7 +76,7 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: easing }}
           >
-            DIKADOKI 
+            DIKADOKI
           </motion.p>
 
           <h1 id="hero-title" className="hero__title">
