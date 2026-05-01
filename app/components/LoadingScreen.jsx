@@ -1,5 +1,4 @@
 import { motion, AnimatePresence } from "framer-motion";
-import "./LoadingScreen.css"; // Pastikan file CSS di-import
 
 export default function LoadingScreen({ isLoading }) {
   // Animasi untuk teks yang muncul satu per satu
