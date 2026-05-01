@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense, lazy } from "react";
 import Lenis from "lenis";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
@@ -6,37 +6,43 @@ import { AnimatePresence } from "framer-motion";
 // Analytics
 import { Analytics } from "@vercel/analytics/react";
 
-// Components
+// Komponen Utama (Langsung di-load karena ada di paling atas)
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
-import Works from "./components/Works";
-import About from "./components/About";
-import Contact from "./components/Contact";
 import Footer from "./components/Footer";
-import Showreel from "./components/Showreel";
 import CustomCursor from "./components/CustomCursor";
 import PageTransition from "./components/PageTransition";
 import LoadingScreen from "./components/LoadingScreen";
-import FloatingWhatsApp from "./components/FloatingWhatsApp";
-import InstagramPreview from "./components/InstagramPreview";
-import AIAssistant from "./components/AIAssistant";
-import AIChat from "./components/AIChat";
 
-// Pages
-import ProjectDetail from "./pages/ProjectDetail";
+// Komponen Bawah (Di-load secara Lazy / ditunda agar ringan)
+const Works = lazy(() => import("./components/Works"));
+const About = lazy(() => import("./components/About"));
+const Contact = lazy(() => import("./components/Contact"));
+const Showreel = lazy(() => import("./components/Showreel"));
+const FloatingWhatsApp = lazy(() => import("./components/FloatingWhatsApp"));
+const InstagramPreview = lazy(() => import("./components/InstagramPreview"));
+const AIAssistant = lazy(() => import("./components/AIAssistant"));
+const AIChat = lazy(() => import("./components/AIChat"));
+
+// Pages (Di-load secara Lazy)
+const ProjectDetail = lazy(() => import("./pages/ProjectDetail"));
 
 function Home({ setIsPreviewOpen }) {
   return (
     <PageTransition>
       <Hero />
-      <Works setIsPreviewOpen={setIsPreviewOpen} />
-      <Showreel />
-      <About />
-      <InstagramPreview />
-      <AIAssistant />
-      <Contact />
-      <FloatingWhatsApp />
-      <AIChat />
+      
+      {/* Bungkus komponen bawah dengan Suspense */}
+      <Suspense fallback={null}>
+        <Works setIsPreviewOpen={setIsPreviewOpen} />
+        <Showreel />
+        <About />
+        <InstagramPreview />
+        <AIAssistant />
+        <Contact />
+        <FloatingWhatsApp />
+        <AIChat />
+      </Suspense>
     </PageTransition>
   );
 }
@@ -112,7 +118,9 @@ function App() {
                 path="/project/:slug"
                 element={
                   <PageTransition>
-                    <ProjectDetail />
+                    <Suspense fallback={null}>
+                      <ProjectDetail />
+                    </Suspense>
                   </PageTransition>
                 }
               />
