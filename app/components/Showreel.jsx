@@ -33,7 +33,7 @@ export default function Showreel() {
           <video
             className="showreel__video"
             autoPlay
-            muted
+            controls
             loop
             playsInline
             preload="metadata"
