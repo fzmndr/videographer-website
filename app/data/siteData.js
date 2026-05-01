@@ -140,7 +140,7 @@ export const worksData = [
   {
     id: 9,
     title: "Adidas",
-    slug: "Brand",
+    slug: "Adidas",
     category: "Brand",
     image: "/images/adidas.jpg",
     video: "/videos/adidas.mp4",
@@ -150,7 +150,7 @@ export const worksData = [
   {
     id: 10,
     title: "YSL",
-    slug: "Brand",
+    slug: "YSL",
     category: "Brand",
     image: "/images/ysl.jpg",
     video: "/videos/ysl.mp4",
