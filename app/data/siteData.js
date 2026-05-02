@@ -59,8 +59,8 @@ export const worksData = [
     title: "Victoria Secret",
     slug: "Victoria-Secret",
     category: "Brand",
-    image: "/images/featured1.jpeg",
-    video: "/videos/featured.mp4",
+    image: "/images/victoria.jpeg",
+    video: "/videos/victoria.mp4",
     description:
       "Bold. Radiant. Unforgettable—capturing the essence of Bombshell",
     client: "Private Client",
