@@ -71,6 +71,7 @@ function About() {
             <motion.span
               className="section-title__line"
               variants={lineVariants}
+              aria-hidden="true" // <-- Upgrade: Menyembunyikan garis dari Screen Reader
               style={{
                 originX: 0,
                 display: "block",
@@ -101,13 +102,10 @@ function About() {
                   fontWeight: 600,
                   letterSpacing: "-0.02em",
                   maxWidth: "18ch",
+                  textWrap: "balance", // <-- Upgrade: Tipografi modern penyeimbang teks otomatis
                 }}
               >
-                A creative vision <br />
-                shaped by precision <br />
-                and brought to life <br />
-                through compelling <br />
-                visual storytelling.
+                A creative vision shaped by precision and brought to life through compelling visual storytelling.
               </h3>
             </motion.div>
           </div>
