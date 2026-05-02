@@ -56,8 +56,8 @@ export const testimonials = [
 export const worksData = [
   {
     id: 1,
-    title: "Victoria Secret",
-    slug: "Victoria-Secret",
+    title: "Victoria's Secret",
+    slug: "Victoria's Secret",
     category: "Brand",
     image: "/images/victoria.jpeg",
     video: "/videos/victoria.mp4",
