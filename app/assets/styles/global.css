@@ -1436,9 +1436,9 @@ textarea:focus-visible {
   padding: 110px 0;
   background: #000;
   position: relative;
-  margin-top: 0;
 }
 
+/* HEADER */
 .showreel__header {
   margin-bottom: 28px;
 }
@@ -1458,7 +1458,6 @@ textarea:focus-visible {
   color: #fff;
   margin-bottom: 12px;
   letter-spacing: -0.04em;
-  will-change: transform, opacity;
 }
 
 .showreel__text {
@@ -1467,6 +1466,7 @@ textarea:focus-visible {
   font-size: 1rem;
 }
 
+/* MEDIA */
 .showreel__media {
   position: relative;
   overflow: hidden;
@@ -1475,22 +1475,36 @@ textarea:focus-visible {
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
+/* VIDEO */
 .showreel__video {
   width: 100%;
   height: min(72vh, 760px);
   display: block;
   object-fit: cover;
-  filter: contrast(1.02) brightness(0.78);
+  filter: contrast(1.05) brightness(0.85);
+  transition: transform 0.6s ease;
 }
 
+/* efek zoom halus saat hover */
+.showreel__media:hover .showreel__video {
+  transform: scale(1.03);
+}
+
+/* OVERLAY */
 .showreel__overlay {
   position: absolute;
   inset: 0;
   display: flex;
-  align-items: end;
+  align-items: flex-end;
   padding: 32px;
-  background:
-    linear-gradient(to top, rgba(0, 0, 0, 0.62), rgba(0, 0, 0, 0.12) 38%, rgba(0, 0, 0, 0.02) 60%);
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.65),
+    rgba(0, 0, 0, 0.15) 40%,
+    transparent 70%
+  );
+  
+  pointer-events: none; 
 }
 
 .showreel__content {
@@ -1512,6 +1526,64 @@ textarea:focus-visible {
   line-height: 1.12;
   letter-spacing: -0.03em;
   max-width: 680px;
+}
+
+.showreel__play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  border: none;
+  font-size: 26px;
+  background: rgba(255, 255, 255, 0.9);
+  color: #000;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 2;
+}
+
+/* hover effect */
+.showreel__play:hover {
+  transform: translate(-50%, -50%) scale(1.1);
+  background: #fff;
+}
+
+/* hide saat video play (opsional, kalau mau) */
+.showreel__media.playing .showreel__play {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.showreel__fullscreen {
+  position: absolute;
+  bottom: 18px;
+  right: 18px;
+  border: none;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  font-size: 18px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+  z-index: 2;
+}
+
+.showreel__fullscreen:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.showreel__play,
+.showreel__fullscreen {
+  opacity: 0;
+}
+
+.showreel__media:hover .showreel__play,
+.showreel__media:hover .showreel__fullscreen {
+  opacity: 1;
 }
 
 /* ABOUT */
