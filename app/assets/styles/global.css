@@ -2366,6 +2366,7 @@ textarea:focus-visible {
 
 /* base button */
 .floating-social__btn {
+  position: relative;
   width: 52px;
   height: 52px;
 
@@ -2381,10 +2382,15 @@ textarea:focus-visible {
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
   transition: all 0.25s ease;
 }
+
 .floating-social__btn::after {
   content: attr(aria-label);
   position: absolute;
   right: 60px;
+  top: 50%;
+  transform: translateY(-50%);
+  white-space: nowrap;
+
   background: #111;
   color: #fff;
   padding: 6px 10px;
@@ -2398,13 +2404,15 @@ textarea:focus-visible {
 .floating-social__btn:hover {
   transform: translateY(-4px) scale(1.05);
 }
+
 .floating-social__btn:hover::after {
   opacity: 1;
 }
 
-/* WhatsApp */
-.floating-social__btn--wa {
-  background: #25d366;
+/* YouTube */
+.floating-social__btn--yt {
+  background: #ff0000;
+  font-size: 21px;
 }
 
 /* Instagram gradient */
@@ -2418,15 +2426,26 @@ textarea:focus-visible {
   );
 }
 
+/* WhatsApp */
+.floating-social__btn--wa {
+  background: #25d366;
+}
+
 @media (max-width: 768px) {
   .floating-social {
     right: 16px;
     bottom: 16px;
+    gap: 10px;
   }
 
   .floating-social__btn {
     width: 48px;
     height: 48px;
+    font-size: 19px;
+  }
+
+  .floating-social__btn::after {
+    display: none;
   }
 }
 

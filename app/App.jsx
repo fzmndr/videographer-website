@@ -22,7 +22,6 @@ const Showreel = lazy(() => import("./components/Showreel"));
 const FloatingWhatsApp = lazy(() => import("./components/FloatingWhatsApp"));
 const InstagramPreview = lazy(() => import("./components/InstagramPreview"));
 const AIAssistant = lazy(() => import("./components/AIAssistant"));
-const AIChat = lazy(() => import("./components/AIChat"));
 
 // Pages (Di-load secara Lazy)
 const ProjectDetail = lazy(() => import("./pages/ProjectDetail"));
@@ -41,7 +40,6 @@ function Home({ setIsPreviewOpen }) {
         <AIAssistant />
         <Contact />
         <FloatingWhatsApp />
-        <AIChat />
       </Suspense>
     </PageTransition>
   );
