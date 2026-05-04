@@ -1,21 +1,40 @@
 import { motion } from "framer-motion";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import RevealText from "./RevealText";
 
 export default function Showreel() {
   const videoRef = useRef(null);
+  const hideTimerRef = useRef(null);
+
   const [isPlaying, setIsPlaying] = useState(false);
+  const [showControl, setShowControl] = useState(true);
+
+  const isMobileDevice = () => {
+    return window.innerWidth <= 768;
+  };
 
   const togglePlay = () => {
     if (!videoRef.current) return;
 
     if (isPlaying) {
       videoRef.current.pause();
+      setIsPlaying(false);
+      setShowControl(true);
+
+      clearTimeout(hideTimerRef.current);
     } else {
       videoRef.current.play();
-    }
+      setIsPlaying(true);
+      setShowControl(true);
 
-    setIsPlaying(!isPlaying);
+      clearTimeout(hideTimerRef.current);
+
+      if (isMobileDevice()) {
+        hideTimerRef.current = setTimeout(() => {
+          setShowControl(false);
+        }, 1200);
+      }
+    }
   };
 
   const handleFullscreen = () => {
@@ -30,10 +49,15 @@ export default function Showreel() {
     }
   };
 
+  useEffect(() => {
+    return () => {
+      clearTimeout(hideTimerRef.current);
+    };
+  }, []);
+
   return (
     <section id="showreel" className="showreel">
       <div className="container">
-        
         {/* HEADER */}
         <motion.div
           className="showreel__header"
@@ -49,7 +73,7 @@ export default function Showreel() {
           </RevealText>
 
           <p className="showreel__text">
-            An exclusive glimpse into my signature works—where storytelling 
+            An exclusive glimpse into my signature works—where storytelling
             meets elegance, and every visual is thoughtfully composed.
           </p>
         </motion.div>
@@ -81,13 +105,23 @@ export default function Showreel() {
             </div>
           </div>
 
-          {/* PLAY BUTTON */}
-          <button className="showreel__play" onClick={togglePlay}>
+          {/* PLAY / PAUSE BUTTON */}
+          <button
+            type="button"
+            className={`showreel__play ${!showControl ? "is-hidden" : ""}`}
+            onClick={togglePlay}
+            aria-label={isPlaying ? "Pause video" : "Play video"}
+          >
             {isPlaying ? "❚❚" : "▶"}
           </button>
 
           {/* FULLSCREEN BUTTON */}
-          <button className="showreel__fullscreen" onClick={handleFullscreen}>
+          <button
+            type="button"
+            className="showreel__fullscreen"
+            onClick={handleFullscreen}
+            aria-label="Fullscreen video"
+          >
             ⛶
           </button>
         </motion.div>

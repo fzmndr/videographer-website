@@ -1541,20 +1541,28 @@ textarea:focus-visible {
   background: rgba(255, 255, 255, 0.9);
   color: #000;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: opacity 0.35s ease, transform 0.35s ease, background 0.3s ease;
   z-index: 2;
+  opacity: 0;
+  pointer-events: none;
 }
 
-/* hover effect */
+/* Hover desktop */
+.showreel__media:hover .showreel__play {
+  opacity: 1;
+  pointer-events: auto;
+}
+
 .showreel__play:hover {
   transform: translate(-50%, -50%) scale(1.1);
   background: #fff;
 }
 
-/* hide saat video play (opsional, kalau mau) */
-.showreel__media.playing .showreel__play {
-  opacity: 0;
-  pointer-events: none;
+/* Saat class is-hidden aktif */
+.showreel__play.is-hidden {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transform: translate(-50%, -50%) scale(0.92);
 }
 
 .showreel__fullscreen {
@@ -1568,22 +1576,66 @@ textarea:focus-visible {
   padding: 8px 10px;
   border-radius: 10px;
   cursor: pointer;
-  transition: 0.3s;
+  transition: opacity 0.35s ease, background 0.3s ease;
   z-index: 2;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.showreel__media:hover .showreel__fullscreen {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .showreel__fullscreen:hover {
   background: rgba(255, 255, 255, 0.2);
 }
 
-.showreel__play,
-.showreel__fullscreen {
-  opacity: 0;
-}
+/* MOBILE */
+@media (max-width: 768px) {
+  .showreel {
+    padding: 80px 0;
+  }
 
-.showreel__media:hover .showreel__play,
-.showreel__media:hover .showreel__fullscreen {
-  opacity: 1;
+  .showreel__media {
+    border-radius: 18px;
+  }
+
+  .showreel__video {
+    height: 420px;
+  }
+
+  .showreel__overlay {
+    padding: 22px;
+  }
+
+  .showreel__play {
+    width: 62px;
+    height: 62px;
+    font-size: 23px;
+
+    /* Di mobile tombol tampil dulu */
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .showreel__play.is-hidden {
+    opacity: 0 !important;
+    pointer-events: none !important;
+    transform: translate(-50%, -50%) scale(0.92);
+  }
+
+  .showreel__fullscreen {
+    opacity: 1;
+    pointer-events: auto;
+    bottom: 14px;
+    right: 14px;
+  }
+
+  /* Matikan efek hover zoom di HP supaya tidak aneh */
+  .showreel__media:hover .showreel__video {
+    transform: none;
+  }
 }
 
 /* ABOUT */
