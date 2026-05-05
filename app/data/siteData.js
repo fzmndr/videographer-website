@@ -73,7 +73,7 @@ export const worksData = [
     slug: "artotel-thamrin",
     category: "Campaign",
     image: "/images/party1.jpg",
-    video: "/videos/wedding.mp4",
+    video: "/videos/artotel.mp4",
     description:
       "A refined moment captured in the heart of Thamrin—where light, motion, and style meet in perfect balance.",
   },
