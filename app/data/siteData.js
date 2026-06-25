@@ -157,4 +157,14 @@ export const worksData = [
     description:
       "A refined expression of luxury by Yves Saint Laurent—timeless elegance captured in a single, captivating scent.",
   },
+  {
+    id: 11,
+    title: "Kahf x Yamaha x Den Dimas",
+    slug: "Kahf x Yamaha x Den Dimas",
+    category: "Brand",
+    image: "/images/kahf.png",
+    video: "/videos/kahf.mp4",
+    description:
+      "A powerful collaboration that brings together style, performance, and passion. The partnership between Kahf, Yamaha, and Den Dimas celebrates the spirit of modern men who are confident, adventurous, and driven to pursue their ambitions.",
+  },
 ];
