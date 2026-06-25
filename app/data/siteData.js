@@ -167,4 +167,19 @@ export const worksData = [
     description:
       "A powerful collaboration that brings together style, performance, and passion. The partnership between Kahf, Yamaha, and Den Dimas celebrates the spirit of modern men who are confident, adventurous, and driven to pursue their ambitions.",
   },
+  {
+    id: 12,
+    title: "Dewa United",
+    slug: "Dewa United",
+    category: "MotorSport", // Kategori sesuai filter
+    image: "/images/motorsport1.jpg", 
+    video: "/videos/motorsport1.mp4", // Video Utama (Motorsport 1)
+    description:
+      "Dewa United Motorsport MFOS Series 2 is a thrilling motorsport event that showcases speed, precision, and the relentless pursuit of excellence. Organized by Dewa United Motorsport, the event brings together racers, automotive enthusiasts, and fans to celebrate the excitement of competitive racing and motorsport culture.",
+    // Ini array untuk menyimpan video sisanya
+    subVideos: [
+      "/videos/motorsport2.mp4",
+      "/videos/motorsport3.mp4"
+    ]
+  },
 ];

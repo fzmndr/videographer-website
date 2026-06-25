@@ -16,6 +16,9 @@ const easing = [0.22, 1, 0.36, 1];
 export default function Works({ setIsPreviewOpen = () => {} }) {
   const [activeFilter, setActiveFilter] = useState("All");
   const [selectedWork, setSelectedWork] = useState(null);
+  
+  // State baru untuk menghandle video mana yang sedang diputar di dalam modal (utama atau sub-video)
+  const [activeMediaIndex, setActiveMediaIndex] = useState(0);
 
   const videoRefs = useRef({});
   const reduceMotion = useReducedMotion();
@@ -29,21 +32,22 @@ export default function Works({ setIsPreviewOpen = () => {} }) {
     ? filteredWorks.findIndex((item) => item.slug === selectedWork.slug)
     : -1;
 
+  // Reset index sub-video ke 0 setiap kali ganti project di modal
+  useEffect(() => {
+    setActiveMediaIndex(0);
+  }, [selectedWork]);
+
   const handlePrevWork = () => {
     if (!filteredWorks.length || currentIndex === -1) return;
-
     const prevIndex =
       currentIndex === 0 ? filteredWorks.length - 1 : currentIndex - 1;
-
     setSelectedWork(filteredWorks[prevIndex]);
   };
 
   const handleNextWork = () => {
     if (!filteredWorks.length || currentIndex === -1) return;
-
     const nextIndex =
       currentIndex === filteredWorks.length - 1 ? 0 : currentIndex + 1;
-
     setSelectedWork(filteredWorks[nextIndex]);
   };
 
@@ -53,7 +57,6 @@ export default function Works({ setIsPreviewOpen = () => {} }) {
 
   const handleMouseEnter = (slug) => {
     if (window.innerWidth <= 900) return;
-
     const video = videoRefs.current[slug];
     if (video) {
       video.currentTime = 0;
@@ -94,15 +97,18 @@ export default function Works({ setIsPreviewOpen = () => {} }) {
     };
   }, [selectedWork, currentIndex, filteredWorks]);
 
+  // Menggabungkan video utama dan subVideos (jika ada) ke dalam satu array untuk modal
+  const currentMediaList = selectedWork
+    ? [selectedWork.video, ...(selectedWork.subVideos || [])]
+    : [];
+  const currentVideoSrc = selectedWork ? currentMediaList[activeMediaIndex] : null;
+
   const headerVariants = {
     hidden: { opacity: 0, y: reduceMotion ? 0 : 20 },
     show: {
       opacity: 1,
       y: 0,
-      transition: {
-        duration: 0.7,
-        ease: easing,
-      },
+      transition: { duration: 0.7, ease: easing },
     },
   };
 
@@ -117,43 +123,27 @@ export default function Works({ setIsPreviewOpen = () => {} }) {
   };
 
   const filterItemVariants = {
-    hidden: {
-      opacity: 0,
-      y: reduceMotion ? 0 : 14,
-    },
+    hidden: { opacity: 0, y: reduceMotion ? 0 : 14 },
     show: {
       opacity: 1,
       y: 0,
-      transition: {
-        duration: 0.5,
-        ease: easing,
-      },
+      transition: { duration: 0.5, ease: easing },
     },
   };
 
   const cardVariants = {
-    initial: {
-      opacity: 0,
-      y: reduceMotion ? 0 : 28,
-      scale: reduceMotion ? 1 : 0.985,
-    },
+    initial: { opacity: 0, y: reduceMotion ? 0 : 28, scale: reduceMotion ? 1 : 0.985 },
     animate: {
       opacity: 1,
       y: 0,
       scale: 1,
-      transition: {
-        duration: 0.7,
-        ease: easing,
-      },
+      transition: { duration: 0.7, ease: easing },
     },
     exit: {
       opacity: 0,
       y: reduceMotion ? 0 : 20,
       scale: reduceMotion ? 1 : 0.985,
-      transition: {
-        duration: 0.35,
-        ease: easing,
-      },
+      transition: { duration: 0.35, ease: easing },
     },
   };
 
@@ -180,7 +170,7 @@ export default function Works({ setIsPreviewOpen = () => {} }) {
             viewport={{ once: true, amount: 0.25 }}
             transition={{ duration: 0.75, delay: 0.14, ease: easing }}
           >
-           A curated selection of projects defined by a cinematic approach—refined, distinctive, and rich in character.
+            A curated selection of projects defined by a cinematic approach—refined, distinctive, and rich in character.
           </motion.p>
         </motion.div>
 
@@ -259,6 +249,21 @@ export default function Works({ setIsPreviewOpen = () => {} }) {
                     playsInline
                     preload="metadata"
                   />
+                  
+                  {/* Indikator visual jika ini adalah album/series yang memiliki subVideos */}
+                  {item.subVideos && item.subVideos.length > 0 && (
+                    <div 
+                      className="work-card__badge" 
+                      style={{ 
+                        position: 'absolute', top: 16, right: 16, 
+                        background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(4px)',
+                        color: '#fff', padding: '4px 10px', borderRadius: '20px', 
+                        fontSize: '11px', fontWeight: '500', zIndex: 10, letterSpacing: '0.5px' 
+                      }}
+                    >
+                      {item.subVideos.length + 1} Videos
+                    </div>
+                  )}
                 </div>
 
                 <div className="work-overlay">
@@ -340,8 +345,10 @@ export default function Works({ setIsPreviewOpen = () => {} }) {
               </button>
 
               <div className="work-preview__media work-preview__media--fullscreen">
+                {/* Background blur video (menyesuaikan video yang aktif) */}
                 <video
-                  src={selectedWork.video}
+                  key={`bg-${currentVideoSrc}`}
+                  src={currentVideoSrc}
                   autoPlay
                   muted
                   loop
@@ -349,8 +356,10 @@ export default function Works({ setIsPreviewOpen = () => {} }) {
                   className="work-preview__video-bg"
                 />
 
+                {/* Main video (menyesuaikan video yang aktif) */}
                 <video
-                  src={selectedWork.video}
+                  key={`main-${currentVideoSrc}`}
+                  src={currentVideoSrc}
                   autoPlay
                   muted
                   loop
@@ -376,6 +385,31 @@ export default function Works({ setIsPreviewOpen = () => {} }) {
                       {selectedWork.description ||
                         "Cinematic visuals with a refined, emotional approach, and a focus on strong storytelling."}
                     </p>
+                    
+                    {/* UI Toggles untuk memilih Sub-Video */}
+                    {currentMediaList.length > 1 && (
+                      <div className="work-preview__sub-videos" style={{ display: 'flex', gap: '8px', marginTop: '16px' }}>
+                        {currentMediaList.map((_, idx) => (
+                          <button
+                            key={idx}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setActiveMediaIndex(idx);
+                            }}
+                            style={{
+                              width: idx === activeMediaIndex ? '24px' : '8px',
+                              height: '8px',
+                              borderRadius: '4px',
+                              backgroundColor: idx === activeMediaIndex ? '#ffffff' : 'rgba(255, 255, 255, 0.4)',
+                              transition: 'all 0.3s ease',
+                              border: 'none',
+                              cursor: 'pointer'
+                            }}
+                            aria-label={`Lihat video ${idx + 1}`}
+                          />
+                        ))}
+                      </div>
+                    )}
                   </div>
 
                   <div className="work-preview__actions">
