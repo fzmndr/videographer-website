@@ -10,7 +10,7 @@ import {
 import { worksData } from "../data/siteData";
 import RevealText from "./RevealText";
 
-const filters = ["All", "Commercial", "Campaign", "Brand"];
+const filters = ["All", "Commercial", "Campaign", "Brand", "MotorSport"];
 const easing = [0.22, 1, 0.36, 1];
 
 export default function Works({ setIsPreviewOpen = () => {} }) {
