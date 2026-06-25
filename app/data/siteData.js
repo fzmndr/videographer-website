@@ -172,7 +172,7 @@ export const worksData = [
     title: "Dewa United",
     slug: "Dewa United",
     category: "MotorSport", // Kategori sesuai filter
-    image: "/images/motorsport1.jpg", 
+    image: "/images/motorsport1.jpeg", 
     video: "/videos/motorsport1.mp4", // Video Utama (Motorsport 1)
     description:
       "Dewa United Motorsport MFOS Series 2 is a thrilling motorsport event that showcases speed, precision, and the relentless pursuit of excellence. Organized by Dewa United Motorsport, the event brings together racers, automotive enthusiasts, and fans to celebrate the excitement of competitive racing and motorsport culture.",
